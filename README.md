@@ -2,7 +2,7 @@
 A simple script to benchmark, and hopefully illustrate good practices of tensor operations in Modern Fortran
 
 ## Compilation notes
-You need an installation of OpenBLAS, see [here](https://github.com/brianz98/A-Fortran-Electronic-Structure-Programme) for notes
+You need an installation of OpenBLAS that is compiled with `USE_OPENMP=1`, see [here](https://github.com/brianz98/A-Fortran-Electronic-Structure-Programme) for notes
 
 ### gfortran (tested on 9.3.0)
 ```
