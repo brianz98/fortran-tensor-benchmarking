@@ -1,0 +1,20 @@
+ Testing simple case of C=A*B, with outer dimensions of (60,60) and inner dimension of 60
+ Test passed!
+ Timings (s)
+ Intrinsic matmul:        0.000232
+ dgemm:                   0.150807
+ OMP:                     0.000090
+ Now test a tensor contraction: I_e^m t_mi^ea, with outer dimensions of (60,60) and inner 60
+ Test passed!
+ Timings (s)
+ Threaded ddot:                     0.024868
+ OMP with element-wise mult:        0.004960
+ Naive OMP:                         0.005450
+ Now the case of v_ei^mn t_mn^ea, with outer dimensions of (60,60) and inner 216000
+ Test failed!
+   54000.7080725001        54000.7080725001        54002.7693013460     
+  0.971672596325697     
+ Timings (s)
+ dgemm:                             0.343345
+ OMP with element-wise mult:        1.696821
+ Naive OMP:                         0.330516
