@@ -266,12 +266,9 @@ module tensor_contraction_tests_m
             integer :: i, g
             real(dp), allocatable :: A_tmp(:,:,:,:)
 
-            ! Doing this with gfortran will result in a segfault
             call system_clock(t0)
-            allocate(A_tmp, mold=A)
             A_tmp = reshape(A, (/nocc,nocc,nocc,nvirt/), order=(/2,3,4,1/))
             call dgemm_wrapper('N','N', nocc, nvirt, nocc**2*nvirt, A_tmp ,B, C)
-            deallocate(A_tmp)
             call system_clock(t1)
 
             t = t1-t0
@@ -287,7 +284,6 @@ module tensor_contraction_tests_m
             real(dp), allocatable :: A_tmp(:,:,:,:)
             
             call system_clock(t0)
-            allocate(A_tmp, mold=A)
             A_tmp = reshape(A, (/nocc,nocc,nocc,nvirt/), order=(/2,3,4,1/))
             !$omp parallel do default(none)&
             !$omp schedule(static,50) collapse(2)&
@@ -379,12 +375,136 @@ module tensor_contraction_tests_m
         end subroutine tensor_contraction_tests
 end module tensor_contraction_tests_m
 
+module tensor_contraction_4d2d_tests_m
+    use linalg
+
+    implicit none
+
+    contains
+
+        subroutine tensor_contraction_4d2d_dgemm(A,B,C,t)
+            real(dp), intent(in) :: A(:,:,:,:),B(:,:)
+            real(dp), dimension(:,:,:,:), intent(out) :: C
+            integer(kind=8), intent(out) :: t
+            integer(kind=8) :: t0, t1
+
+            call system_clock(t0)
+            call dgemm_wrapper('N','N', nocc**2*nvirt, nvirt, nvirt, A ,B, C)
+            call system_clock(t1)
+
+            t = t1-t0
+
+        end subroutine tensor_contraction_4d2d_dgemm
+
+        subroutine tensor_contraction_4d2d_ele_wise(A,B,C,t)
+            real(dp), intent(in) :: A(:,:,:,:),B(:,:)
+            real(dp), dimension(:,:,:,:), intent(out) :: C
+            integer(kind=8), intent(out) :: t
+            integer(kind=8) :: t0, t1
+            integer :: i, j, g, h
+            
+            call system_clock(t0)
+            !$omp parallel do default(none)&
+            !$omp schedule(static,50) collapse(2)&
+            !$omp shared(A,B,C)
+            do h = 1, nvirt
+                do g = 1, nvirt
+                    do j = 1, nocc
+                        do i = 1, nocc
+                            C(i,j,g,h) = sum(A(i,j,g,:)*B(:,h))
+                        end do
+                    end do
+                end do
+            end do
+            !$omp end parallel do
+            
+            call system_clock(t1)
+            
+            t = t1-t0
+
+        end subroutine tensor_contraction_4d2d_ele_wise
+
+        subroutine tensor_contraction_4d2d_naive_omp(A,B,C,t)
+            real(dp), dimension(:,:,:,:), intent(in) :: A,B(:,:)
+            real(dp), dimension(:,:,:,:), intent(out) :: C
+            integer(kind=8), intent(out) :: t
+            integer(kind=8) :: t0, t1
+            integer :: i, j, g, h, e
+            real(dp) :: tmp
+
+            call system_clock(t0)
+            !$omp parallel do default(none)&
+            !$omp schedule(static,50) collapse(2)&
+            !$omp shared(A,B,C)&
+            !$omp private(tmp)
+            do h = 1, nvirt
+                do g = 1, nvirt
+                    do j = 1, nocc
+                        do i = 1, nocc
+                            tmp = 0.0_dp
+                            do e = 1, nvirt
+                                tmp = tmp + A(i,j,g,e)*B(e,h)
+                            end do
+                            C(i,j,g,h) = tmp
+                        end do
+                    end do
+                end do
+            end do
+            !$omp end parallel do
+            call system_clock(t1)
+
+            t = t1-t0
+
+        end subroutine tensor_contraction_4d2d_naive_omp
+
+        subroutine tensor_contraction_4d2d_tests()
+
+            integer(kind=8) :: t1, t2, t3, count_rate, count_max
+            real(dp), dimension(:,:,:,:), allocatable :: A,B(:,:),C
+            real(dp) :: c1, c2, c3
+
+            allocate(A(nocc,nocc,nvirt,nvirt), source=0.0_dp)
+            allocate(B(nvirt,nvirt), source=0.0_dp)
+            allocate(C(nocc,nocc,nvirt,nvirt), source=0.0_dp)
+            
+            call random_number(A)
+            call random_number(B)
+
+            write(6,'(1X,A,I0,A,I0,A,I0)') &
+            'Now the case of t_ij^ae I_e^b, with outer dimensions of (', nocc**2,',',nvirt**2,') and inner ',nvirt
+            call system_clock(count_rate=count_rate, count_max=count_max)
+            call tensor_contraction_4d2d_dgemm(A,B,C,t1)
+            c1 = sum(abs(C))/size(C)
+            C = 0.0_dp
+            call tensor_contraction_4d2d_ele_wise(A,B,C,t2)
+            c2 = sum(abs(C))/size(C)
+            C = 0.0_dp
+            call tensor_contraction_4d2d_naive_omp(A,B,C,t3)
+            c3 = sum(abs(C))/size(C)
+            C = 0.0_dp
+
+            if (stdev((/c1,c2,c3/)) < 1e-5) then
+                write(6,'(1X,A)') 'Test passed!'
+            else
+                write(6,'(1X,A)') 'Test failed!'
+                print*,c1,c2,c3,stdev((/c1,c2,c3/))
+            end if
+
+            write(6,'(1X,A)') 'Timings (s)'
+            write(6,'(1X,A,1X,F15.6)') 'dgemm:                     ',real(t1)/count_rate
+            write(6,'(1X,A,1X,F15.6)') 'OMP with element-wise mult:',real(t2)/count_rate
+            write(6,'(1X,A,1X,F15.6)') 'Naive OMP:                 ',real(t3)/count_rate
+
+        end subroutine tensor_contraction_4d2d_tests
+end module tensor_contraction_4d2d_tests_m
+
 program dgemm_test
     use, intrinsic :: iso_fortran_env, only: stdin=>input_unit, stdout=>output_unit, stderr=>error_unit
     use linalg
     use matmul_tests_m, only: matmul_tests
     use tensor_dot_tests_m, only: tensor_dot_tests
     use tensor_contraction_tests_m, only: tensor_contraction_tests
+    use tensor_contraction_4d2d_tests_m, only: tensor_contraction_4d2d_tests
 
     implicit none
 
@@ -399,11 +519,13 @@ program dgemm_test
     integer(kind=8) :: count_rate, count_max
     real(dp) :: tmp
 
-    call matmul_tests()
+    !call matmul_tests()
 
-    call tensor_dot_tests()
+    !call tensor_dot_tests()
 
-    call tensor_contraction_tests()
+    !call tensor_contraction_tests()
+
+    call tensor_contraction_4d2d_tests()
     
 end program dgemm_test
 
