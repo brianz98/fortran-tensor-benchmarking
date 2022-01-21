@@ -267,7 +267,8 @@ module tensor_contraction_tests_m
             real(dp), allocatable :: A_tmp(:,:,:,:)
 
             call system_clock(t0)
-            A_tmp = reshape(A, (/nocc,nocc,nocc,nvirt/), order=(/2,3,4,1/))
+            ! Note on reshape usage: eimn->imne would be order=(4,1,2,3) (rank where original indices end up at, in original order)
+            A_tmp = reshape(A, (/nocc,nocc,nocc,nvirt/), order=(/4,1,2,3/))
             call dgemm_wrapper('N','N', nocc, nvirt, nocc**2*nvirt, A_tmp ,B, C)
             call system_clock(t1)
 
@@ -284,7 +285,7 @@ module tensor_contraction_tests_m
             real(dp), allocatable :: A_tmp(:,:,:,:)
             
             call system_clock(t0)
-            A_tmp = reshape(A, (/nocc,nocc,nocc,nvirt/), order=(/2,3,4,1/))
+            A_tmp = reshape(A, (/nocc,nocc,nocc,nvirt/), order=(/4,1,2,3/))
             !$omp parallel do default(none)&
             !$omp schedule(static,50) collapse(2)&
             !$omp shared(A_tmp,B,C)
@@ -514,11 +515,11 @@ module tensor_contraction_4d2d_transpose_tests_m
 
             call system_clock(t0)
             ! Reshape A(i,m,a,b) to tmp1(i,a,b,m)
-            tmp1 = reshape(A,(/nocc,nvirt,nvirt,nocc/),order=(/1,3,4,2/))
+            tmp1 = reshape(A,(/nocc,nvirt,nvirt,nocc/),order=(/1,4,2,3/))
             allocate(tmp2(nocc,nvirt,nvirt,nocc))
-            call dgemm_wrapper('N','T', nvirt**2*nocc, nocc, nocc, A ,B, tmp2)
+            call dgemm_wrapper('N','T', nvirt**2*nocc, nocc, nocc, tmp1 ,B, tmp2)
             ! tmp2(i,a,b,j)
-            C = reshape(tmp2,(/nocc,nocc,nvirt,nvirt/),order=(/1,4,2,3/))
+            C = reshape(tmp2,(/nocc,nocc,nvirt,nvirt/),order=(/1,4,3,2/))
             call system_clock(t1)
 
             t = t1-t0
@@ -642,21 +643,13 @@ program dgemm_test
     ! We test the performance several cases of dense tensor contractions between OpenBLAS(OMP threaded), matmul(where possible)
     ! and naive loops + OpenMP
 
-    
-    real(dp), dimension(:,:), allocatable :: A, B, C1, C2, C3
-    real(dp), dimension(:,:,:,:), allocatable :: D, E, F, F1
-    real(dp), external :: ddot
-    integer :: i, g, m, h, n
-    integer(kind=8) :: count_rate, count_max
-    real(dp) :: tmp
+    call matmul_tests()
 
-    !call matmul_tests()
+    call tensor_dot_tests()
 
-    !call tensor_dot_tests()
+    call tensor_contraction_tests()
 
-    !call tensor_contraction_tests()
-
-    !call tensor_contraction_4d2d_tests()
+    call tensor_contraction_4d2d_tests()
 
     call tensor_contraction_4d2d_transpose_tests()
     
