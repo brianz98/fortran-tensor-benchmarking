@@ -1,20 +1,39 @@
  Testing simple case of C=A*B, with outer dimensions of (60,60) and inner dimension of 60
  Test passed!
  Timings (s)
- Intrinsic matmul:        0.000232
- dgemm:                   0.150807
- OMP:                     0.000090
+ Intrinsic matmul:        0.000203
+ Workshare matmul:        0.001475
+ dgemm:                   0.191155
+ OMP:                     0.000119
+ A simple element-wise division of matrix dimension of (60,60)
+ A simple element-wise division of matrix dimension of (60,60,60,60)
+ Timings (s)
+ Intrinsic, 2d:            0.000008
+ OMP workshare, 2d:        0.000087
+ Intrinsic, 4d:            0.027219
+ OMP workshare, 4d:        0.027291
  Now test a tensor contraction: I_e^m t_mi^ea, with outer dimensions of (60,60) and inner 60
  Test passed!
  Timings (s)
- Threaded ddot:                     0.024868
- OMP with element-wise mult:        0.004960
- Naive OMP:                         0.005450
+ Threaded ddot:                     0.025335
+ OMP with element-wise mult:        0.004340
+ Naive OMP:                         0.004225
  Now the case of v_ei^mn t_mn^ea, with outer dimensions of (60,60) and inner 216000
- Test failed!
-   54000.7080725001        54000.7080725001        54002.7693013460     
-  0.971672596325697     
+ Test passed!
  Timings (s)
- dgemm:                             0.343345
- OMP with element-wise mult:        1.696821
- Naive OMP:                         0.330516
+ dgemm:                             0.242833
+ OMP with element-wise mult:        1.544999
+ Naive OMP:                         0.326822
+ Now the case of t_ij^ae I_e^b, with outer dimensions of (3600,3600) and inner 60
+ Test passed!
+ Timings (s)
+ dgemm:                             0.011190
+ OMP with element-wise mult:        0.224751
+ Naive OMP:                         0.224113
+ Now the case of t_im^ab I_j^m, with outer dimensions of (3600,3600) and inner 60
+ Test passed!
+ Timings (s)
+ dgemm:                             0.321345
+ dgemm alternative:                 0.321345
+ OMP with element-wise mult:        0.053391
+ Naive OMP:                         0.052271
