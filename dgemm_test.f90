@@ -45,6 +45,22 @@ module matmul_tests_m
 
         end subroutine matmul_intrinsic
 
+        subroutine matmul_workshare(A,B,C,t)
+            real(dp), dimension(:,:), intent(in) :: A, B
+            real(dp), dimension(:,:), intent(out) :: C
+            integer(kind=8), intent(out) :: t
+            integer(kind=8) :: t0, t1
+
+            call system_clock(t0)
+            !$omp parallel workshare default(none) shared(A,B,C)
+            C(:,:) = matmul(A(:,:),B(:,:))
+            !$omp end parallel workshare
+            call system_clock(t1)
+
+            t = t1-t0
+
+        end subroutine matmul_workshare
+
         subroutine matmul_dgemm(A,B,C,t)
             real(dp), dimension(:,:), intent(in) :: A, B
             real(dp), dimension(:,:), intent(out) :: C
@@ -84,9 +100,9 @@ module matmul_tests_m
 
         subroutine matmul_tests()
 
-            integer(kind=8) :: t1, t2, t3, count_rate, count_max
+            integer(kind=8) :: t1, t2, t3, t4, count_rate, count_max
             real(dp), dimension(:,:), allocatable :: A,B,C
-            real(dp) :: c1, c2, c3
+            real(dp) :: c1, c2, c3, c4
 
             allocate(A(nocc,nvirt), source=0.0_dp)
             allocate(B(nvirt,nvirt), source=0.0_dp)
@@ -100,25 +116,131 @@ module matmul_tests_m
             call system_clock(count_rate=count_rate, count_max=count_max)
             call matmul_intrinsic(A,B,C,t1)
             c1 = sum(abs(C))/size(C)
-            call matmul_dgemm(A,B,C,t2)
+            call matmul_workshare(A,B,C,t2)
             c2 = sum(abs(C))/size(C)
-            call matmul_omp(A,B,C,t3)
+            call matmul_dgemm(A,B,C,t3)
             c3 = sum(abs(C))/size(C)
+            call matmul_omp(A,B,C,t4)
+            c4 = sum(abs(C))/size(C)
 
-            if (stdev((/c1,c2,c3/)) < 1e-5) then
+            if (stdev((/c1,c2,c3,c4/)) < 1e-5) then
                 write(6,'(1X,A)') 'Test passed!'
             else
                 write(6,'(1X,A)') 'Test failed!'
-                print*,c1,c2,c3,stdev((/c1,c2,c3/))
+                print*,c1,c2,c3,c4,stdev((/c1,c2,c3,c4/))
             end if
 
             write(6,'(1X,A)') 'Timings (s)'
             write(6,'(1X,A,1X,F15.6)') 'Intrinsic matmul:',real(t1)/count_rate
-            write(6,'(1X,A,1X,F15.6)') 'dgemm:           ',real(t2)/count_rate
-            write(6,'(1X,A,1X,F15.6)') 'OMP:             ',real(t3)/count_rate
+            write(6,'(1X,A,1X,F15.6)') 'Workshare matmul:',real(t2)/count_rate
+            write(6,'(1X,A,1X,F15.6)') 'dgemm:           ',real(t3)/count_rate
+            write(6,'(1X,A,1X,F15.6)') 'OMP:             ',real(t4)/count_rate
 
         end subroutine matmul_tests
 end module matmul_tests_m
+
+module workshare_tests_m
+    use linalg
+
+    implicit none
+
+    contains
+
+        subroutine element_wise_intrinsic_2d(A,B,C,t)
+            real(dp), dimension(:,:), intent(in) :: A, B
+            real(dp), dimension(:,:), intent(out) :: C
+            integer(kind=8), intent(out) :: t
+            integer(kind=8) :: t0, t1
+
+            call system_clock(t0)
+            C = A/B
+            call system_clock(t1)
+
+            t = t1-t0
+
+        end subroutine element_wise_intrinsic_2d
+
+        subroutine workshare_2d(A,B,C,t)
+            real(dp), dimension(:,:), intent(in) :: A, B
+            real(dp), dimension(:,:), intent(out) :: C
+            integer(kind=8), intent(out) :: t
+            integer(kind=8) :: t0, t1
+            
+            call system_clock(t0)
+            !$omp parallel workshare default(none) shared(A,B,C)
+            C(:,:) = A(:,:)/B(:,:)
+            !$omp end parallel workshare
+            call system_clock(t1)
+            
+            t = t1-t0
+
+        end subroutine workshare_2d
+
+        subroutine element_wise_intrinsic_4d(A,B,C,t)
+            real(dp), dimension(:,:,:,:), intent(in) :: A, B
+            real(dp), dimension(:,:,:,:), intent(out) :: C
+            integer(kind=8), intent(out) :: t
+            integer(kind=8) :: t0, t1
+
+            call system_clock(t0)
+            C = A/B
+            call system_clock(t1)
+
+            t = t1-t0
+
+        end subroutine element_wise_intrinsic_4d
+
+        subroutine workshare_4d(A,B,C,t)
+            real(dp), dimension(:,:,:,:), intent(in) :: A, B
+            real(dp), dimension(:,:,:,:), intent(out) :: C
+            integer(kind=8), intent(out) :: t
+            integer(kind=8) :: t0, t1
+            
+            call system_clock(t0)
+            !$omp parallel workshare default(none) shared(A,B,C)
+            C(:,:,:,:) = A(:,:,:,:)/B(:,:,:,:)
+            !$omp end parallel workshare
+            call system_clock(t1)
+            
+            t = t1-t0
+
+        end subroutine workshare_4d
+
+        subroutine workshare_tests()
+
+            integer(kind=8) :: t1, t2, t3, t4, count_rate, count_max
+            real(dp), dimension(:,:), allocatable :: A,B,C
+            real(dp), dimension(:,:,:,:), allocatable :: D,E,F
+
+            allocate(A(nocc,nvirt), source=0.0_dp)
+            allocate(B,C, source=A)
+
+            allocate(D(nocc,nocc,nvirt,nvirt), source=0.0_dp)
+            allocate(E,F, source=D)
+            
+            call random_number(A)
+            call random_number(B)
+            call random_number(D)
+            call random_number(E)
+
+            write(6,'(1X,A,I0,A,I0,A)') &
+            'A simple element-wise division of matrix dimension of (', nocc,',',nvirt,')'
+            call system_clock(count_rate=count_rate, count_max=count_max)
+            call element_wise_intrinsic_2d(A,B,C,t1)
+            call workshare_2d(A,B,C,t2)
+            write(6,'(1X,A,I0,A,I0,A,I0,A,I0,A)') &
+            'A simple element-wise division of matrix dimension of (', nocc,',', nocc,',', nvirt,',',nvirt,')'
+            call element_wise_intrinsic_4d(D,E,F,t3)
+            call workshare_4d(D,E,F,t4)
+
+            write(6,'(1X,A)') 'Timings (s)'
+            write(6,'(1X,A,1X,F15.6)') 'Intrinsic, 2d:    ',real(t1)/count_rate
+            write(6,'(1X,A,1X,F15.6)') 'OMP workshare, 2d:',real(t2)/count_rate
+            write(6,'(1X,A,1X,F15.6)') 'Intrinsic, 4d:    ',real(t3)/count_rate
+            write(6,'(1X,A,1X,F15.6)') 'OMP workshare, 4d:',real(t4)/count_rate
+
+        end subroutine workshare_tests
+end module workshare_tests_m
 
 module tensor_dot_tests_m
     use linalg
@@ -526,6 +648,26 @@ module tensor_contraction_4d2d_transpose_tests_m
 
         end subroutine tensor_contraction_4d2d_transpose_dgemm
 
+        subroutine tensor_contraction_4d2d_transpose_dgemm_alt(A,B,C,t)
+            real(dp), intent(in) :: A(:,:,:,:),B(:,:)
+            real(dp), dimension(:,:,:,:), intent(out) :: C
+            integer(kind=8), intent(out) :: t
+            integer(kind=8) :: t0, t1
+            real(dp), dimension(:,:,:,:), allocatable :: tmp1, tmp2
+
+            call system_clock(t0)
+            ! Reshape A(i,m,a,b) to tmp1(m,i,a,b)
+            tmp1 = reshape(A,(/nocc,nocc,nvirt,nvirt/),order=(/2,1,3,4/))
+            call dgemm_wrapper('N','N', nocc, nvirt**2*nocc, nocc, B, tmp1, C)
+            ! C(j,i,a,b)
+            tmp2 = reshape(C,(/nocc,nocc,nvirt,nvirt/),order=(/2,1,3,4/))
+            C = tmp2
+            call system_clock(t1)
+
+            t = t1-t0
+
+        end subroutine tensor_contraction_4d2d_transpose_dgemm_alt
+
         subroutine tensor_contraction_4d2d_transpose_ele_wise(A,B,C,t)
             real(dp), intent(in) :: A(:,:,:,:),B(:,:)
             real(dp), dimension(:,:,:,:), intent(out) :: C
@@ -591,7 +733,7 @@ module tensor_contraction_4d2d_transpose_tests_m
 
             integer(kind=8) :: t1, t2, t3, count_rate, count_max
             real(dp), dimension(:,:,:,:), allocatable :: A,B(:,:),C
-            real(dp) :: c1, c2, c3
+            real(dp) :: c1, c2, c3, c4
 
             allocate(A(nocc,nocc,nvirt,nvirt), source=0.0_dp)
             allocate(B(nvirt,nvirt), source=0.0_dp)
@@ -606,22 +748,27 @@ module tensor_contraction_4d2d_transpose_tests_m
             call tensor_contraction_4d2d_transpose_dgemm(A,B,C,t1)
             c1 = sum(abs(C))/size(C)
             C = 0.0_dp
-            call tensor_contraction_4d2d_transpose_ele_wise(A,B,C,t2)
+            call system_clock(count_rate=count_rate, count_max=count_max)
+            call tensor_contraction_4d2d_transpose_dgemm_alt(A,B,C,t1)
             c2 = sum(abs(C))/size(C)
             C = 0.0_dp
-            call tensor_contraction_4d2d_transpose_naive_omp(A,B,C,t3)
+            call tensor_contraction_4d2d_transpose_ele_wise(A,B,C,t2)
             c3 = sum(abs(C))/size(C)
             C = 0.0_dp
+            call tensor_contraction_4d2d_transpose_naive_omp(A,B,C,t3)
+            c4 = sum(abs(C))/size(C)
+            C = 0.0_dp
 
-            if (stdev((/c1,c2,c3/)) < 1e-5) then
+            if (stdev((/c1,c2,c3,c4/)) < 1e-5) then
                 write(6,'(1X,A)') 'Test passed!'
             else
                 write(6,'(1X,A)') 'Test failed!'
-                print*,c1,c2,c3,stdev((/c1,c2,c3/))
+                print*,c1,c2,c3,stdev((/c1,c2,c3,c4/))
             end if
 
             write(6,'(1X,A)') 'Timings (s)'
             write(6,'(1X,A,1X,F15.6)') 'dgemm:                     ',real(t1)/count_rate
+            write(6,'(1X,A,1X,F15.6)') 'dgemm alternative:         ',real(t1)/count_rate
             write(6,'(1X,A,1X,F15.6)') 'OMP with element-wise mult:',real(t2)/count_rate
             write(6,'(1X,A,1X,F15.6)') 'Naive OMP:                 ',real(t3)/count_rate
 
@@ -633,6 +780,7 @@ program dgemm_test
     use, intrinsic :: iso_fortran_env, only: stdin=>input_unit, stdout=>output_unit, stderr=>error_unit
     use linalg
     use matmul_tests_m, only: matmul_tests
+    use workshare_tests_m, only: workshare_tests
     use tensor_dot_tests_m, only: tensor_dot_tests
     use tensor_contraction_tests_m, only: tensor_contraction_tests
     use tensor_contraction_4d2d_tests_m, only: tensor_contraction_4d2d_tests
@@ -644,6 +792,8 @@ program dgemm_test
     ! and naive loops + OpenMP
 
     call matmul_tests()
+
+    call workshare_tests()
 
     call tensor_dot_tests()
 

@@ -1,0 +1,7 @@
+ Testing simple case of C=A*B, with outer dimensions of (3000,3000) and inner dimension of 3000
+ Test passed!
+ Timings (s)
+ Intrinsic matmul:        2.963882
+ Workshare matmul:        2.943902
+ dgemm:                   0.204970
+ OMP:                    17.578709
