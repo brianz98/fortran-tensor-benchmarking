@@ -1,0 +1,769 @@
+ Testing simple case of C=A*B, with outer dimensions of (10,10) and inner dimension of 10
+ Test passed!
+ Timings (s)
+ Intrinsic matmul:        0.000001
+ Workshare matmul:        0.001391
+ dgemm:                   0.023317
+ OMP:                     0.000011
+ Testing simple case of C=A*B, with outer dimensions of (12,12) and inner dimension of 12
+ Test passed!
+ Timings (s)
+ Intrinsic matmul:        0.000002
+ Workshare matmul:        0.000006
+ dgemm:                   0.000006
+ OMP:                     0.000005
+ Testing simple case of C=A*B, with outer dimensions of (14,14) and inner dimension of 14
+ Test passed!
+ Timings (s)
+ Intrinsic matmul:        0.000003
+ Workshare matmul:        0.000005
+ dgemm:                   0.000006
+ OMP:                     0.000005
+ Testing simple case of C=A*B, with outer dimensions of (16,16) and inner dimension of 16
+ Test passed!
+ Timings (s)
+ Intrinsic matmul:        0.000004
+ Workshare matmul:        0.000005
+ dgemm:                   0.000003
+ OMP:                     0.000006
+ Testing simple case of C=A*B, with outer dimensions of (18,18) and inner dimension of 18
+ Test passed!
+ Timings (s)
+ Intrinsic matmul:        0.000005
+ Workshare matmul:        0.000006
+ dgemm:                   0.000002
+ OMP:                     0.000013
+ Testing simple case of C=A*B, with outer dimensions of (20,20) and inner dimension of 20
+ Test passed!
+ Timings (s)
+ Intrinsic matmul:        0.000007
+ Workshare matmul:        0.000007
+ dgemm:                   0.000004
+ OMP:                     0.000006
+ Testing simple case of C=A*B, with outer dimensions of (22,22) and inner dimension of 22
+ Test passed!
+ Timings (s)
+ Intrinsic matmul:        0.000009
+ Workshare matmul:        0.000007
+ dgemm:                   0.000010
+ OMP:                     0.000018
+ Testing simple case of C=A*B, with outer dimensions of (24,24) and inner dimension of 24
+ Test passed!
+ Timings (s)
+ Intrinsic matmul:        0.000008
+ Workshare matmul:        0.000012
+ dgemm:                   0.000003
+ OMP:                     0.000009
+ Testing simple case of C=A*B, with outer dimensions of (26,26) and inner dimension of 26
+ Test passed!
+ Timings (s)
+ Intrinsic matmul:        0.000012
+ Workshare matmul:        0.000014
+ dgemm:                   0.000007
+ OMP:                     0.000010
+ Testing simple case of C=A*B, with outer dimensions of (28,28) and inner dimension of 28
+ Test passed!
+ Timings (s)
+ Intrinsic matmul:        0.000015
+ Workshare matmul:        0.000012
+ dgemm:                   0.000006
+ OMP:                     0.000012
+ Testing simple case of C=A*B, with outer dimensions of (30,30) and inner dimension of 30
+ Test passed!
+ Timings (s)
+ Intrinsic matmul:        0.000019
+ Workshare matmul:        0.000015
+ dgemm:                   0.000006
+ OMP:                     0.000015
+ Testing simple case of C=A*B, with outer dimensions of (32,32) and inner dimension of 32
+ Test passed!
+ Timings (s)
+ Intrinsic matmul:        0.000017
+ Workshare matmul:        0.000015
+ dgemm:                   0.000005
+ OMP:                     0.000014
+ Testing simple case of C=A*B, with outer dimensions of (34,34) and inner dimension of 34
+ Test passed!
+ Timings (s)
+ Intrinsic matmul:        0.000022
+ Workshare matmul:        0.000017
+ dgemm:                   0.000008
+ OMP:                     0.000015
+ Testing simple case of C=A*B, with outer dimensions of (36,36) and inner dimension of 36
+ Test passed!
+ Timings (s)
+ Intrinsic matmul:        0.000028
+ Workshare matmul:        0.000030
+ dgemm:                   0.000006
+ OMP:                     0.000019
+ Testing simple case of C=A*B, with outer dimensions of (38,38) and inner dimension of 38
+ Test passed!
+ Timings (s)
+ Intrinsic matmul:        0.000034
+ Workshare matmul:        0.000023
+ dgemm:                   0.000010
+ OMP:                     0.000020
+ Testing simple case of C=A*B, with outer dimensions of (40,40) and inner dimension of 40
+ Test passed!
+ Timings (s)
+ Intrinsic matmul:        0.000031
+ Workshare matmul:        0.000023
+ dgemm:                   0.000008
+ OMP:                     0.000021
+ Testing simple case of C=A*B, with outer dimensions of (42,42) and inner dimension of 42
+ Test passed!
+ Timings (s)
+ Intrinsic matmul:        0.000039
+ Workshare matmul:        0.000028
+ dgemm:                   0.000046
+ OMP:                     0.000021
+ Testing simple case of C=A*B, with outer dimensions of (44,44) and inner dimension of 44
+ Test passed!
+ Timings (s)
+ Intrinsic matmul:        0.000048
+ Workshare matmul:        0.000050
+ dgemm:                   0.000010
+ OMP:                     0.000025
+ Testing simple case of C=A*B, with outer dimensions of (46,46) and inner dimension of 46
+ Test passed!
+ Timings (s)
+ Intrinsic matmul:        0.000057
+ Workshare matmul:        0.000037
+ dgemm:                   0.000009
+ OMP:                     0.000027
+ Testing simple case of C=A*B, with outer dimensions of (48,48) and inner dimension of 48
+ Test passed!
+ Timings (s)
+ Intrinsic matmul:        0.000052
+ Workshare matmul:        0.000035
+ dgemm:                   0.000008
+ OMP:                     0.000030
+ Testing simple case of C=A*B, with outer dimensions of (50,50) and inner dimension of 50
+ Test passed!
+ Timings (s)
+ Intrinsic matmul:        0.000062
+ Workshare matmul:        0.000042
+ dgemm:                   0.000012
+ OMP:                     0.000044
+ Testing simple case of C=A*B, with outer dimensions of (52,52) and inner dimension of 52
+ Test passed!
+ Timings (s)
+ Intrinsic matmul:        0.000074
+ Workshare matmul:        0.000049
+ dgemm:                   0.000010
+ OMP:                     0.000035
+ Testing simple case of C=A*B, with outer dimensions of (54,54) and inner dimension of 54
+ Test passed!
+ Timings (s)
+ Intrinsic matmul:        0.000103
+ Workshare matmul:        0.000054
+ dgemm:                   0.000012
+ OMP:                     0.000049
+ Testing simple case of C=A*B, with outer dimensions of (56,56) and inner dimension of 56
+ Test passed!
+ Timings (s)
+ Intrinsic matmul:        0.000081
+ Workshare matmul:        0.000054
+ dgemm:                   0.000010
+ OMP:                     0.000041
+ Testing simple case of C=A*B, with outer dimensions of (58,58) and inner dimension of 58
+ Test passed!
+ Timings (s)
+ Intrinsic matmul:        0.000096
+ Workshare matmul:        0.000060
+ dgemm:                   0.000012
+ OMP:                     0.000046
+ Testing simple case of C=A*B, with outer dimensions of (60,60) and inner dimension of 60
+ Test passed!
+ Timings (s)
+ Intrinsic matmul:        0.000117
+ Workshare matmul:        0.000071
+ dgemm:                   0.000010
+ OMP:                     0.000048
+ Testing simple case of C=A*B, with outer dimensions of (62,62) and inner dimension of 62
+ Test passed!
+ Timings (s)
+ Intrinsic matmul:        0.000129
+ Workshare matmul:        0.000079
+ dgemm:                   0.000012
+ OMP:                     0.000052
+ Testing simple case of C=A*B, with outer dimensions of (64,64) and inner dimension of 64
+ Test passed!
+ Timings (s)
+ Intrinsic matmul:        0.000131
+ Workshare matmul:        0.000080
+ dgemm:                   0.000011
+ OMP:                     0.000057
+ Testing simple case of C=A*B, with outer dimensions of (66,66) and inner dimension of 66
+ Test passed!
+ Timings (s)
+ Intrinsic matmul:        0.000142
+ Workshare matmul:        0.000094
+ dgemm:                   0.000014
+ OMP:                     0.000063
+ Testing simple case of C=A*B, with outer dimensions of (68,68) and inner dimension of 68
+ Test passed!
+ Timings (s)
+ Intrinsic matmul:        0.000165
+ Workshare matmul:        0.000110
+ dgemm:                   0.000014
+ OMP:                     0.000068
+ Testing simple case of C=A*B, with outer dimensions of (70,70) and inner dimension of 70
+ Test passed!
+ Timings (s)
+ Intrinsic matmul:        0.000183
+ Workshare matmul:        0.000123
+ dgemm:                   0.000015
+ OMP:                     0.000073
+ Testing simple case of C=A*B, with outer dimensions of (72,72) and inner dimension of 72
+ Test passed!
+ Timings (s)
+ Intrinsic matmul:        0.000182
+ Workshare matmul:        0.000123
+ dgemm:                   0.000013
+ OMP:                     0.000078
+ Testing simple case of C=A*B, with outer dimensions of (74,74) and inner dimension of 74
+ Test passed!
+ Timings (s)
+ Intrinsic matmul:        0.000194
+ Workshare matmul:        0.000135
+ dgemm:                   0.000016
+ OMP:                     0.000085
+ Testing simple case of C=A*B, with outer dimensions of (76,76) and inner dimension of 76
+ Test passed!
+ Timings (s)
+ Intrinsic matmul:        0.000227
+ Workshare matmul:        0.000154
+ dgemm:                   0.000017
+ OMP:                     0.000091
+ Testing simple case of C=A*B, with outer dimensions of (78,78) and inner dimension of 78
+ Test passed!
+ Timings (s)
+ Intrinsic matmul:        0.000245
+ Workshare matmul:        0.000164
+ dgemm:                   0.000018
+ OMP:                     0.000098
+ Testing simple case of C=A*B, with outer dimensions of (80,80) and inner dimension of 80
+ Test passed!
+ Timings (s)
+ Intrinsic matmul:        0.000244
+ Workshare matmul:        0.000164
+ dgemm:                   0.000017
+ OMP:                     0.000101
+ Testing simple case of C=A*B, with outer dimensions of (82,82) and inner dimension of 82
+ Test passed!
+ Timings (s)
+ Intrinsic matmul:        0.000268
+ Workshare matmul:        0.000178
+ dgemm:                   0.000019
+ OMP:                     0.000109
+ Testing simple case of C=A*B, with outer dimensions of (84,84) and inner dimension of 84
+ Test passed!
+ Timings (s)
+ Intrinsic matmul:        0.000292
+ Workshare matmul:        0.000201
+ dgemm:                   0.000020
+ OMP:                     0.000116
+ Testing simple case of C=A*B, with outer dimensions of (86,86) and inner dimension of 86
+ Test passed!
+ Timings (s)
+ Intrinsic matmul:        0.000322
+ Workshare matmul:        0.000218
+ dgemm:                   0.000022
+ OMP:                     0.000140
+ Testing simple case of C=A*B, with outer dimensions of (88,88) and inner dimension of 88
+ Test passed!
+ Timings (s)
+ Intrinsic matmul:        0.000318
+ Workshare matmul:        0.000218
+ dgemm:                   0.000019
+ OMP:                     0.000128
+ Testing simple case of C=A*B, with outer dimensions of (90,90) and inner dimension of 90
+ Test passed!
+ Timings (s)
+ Intrinsic matmul:        0.000342
+ Workshare matmul:        0.000227
+ dgemm:                   0.000022
+ OMP:                     0.000138
+ Testing simple case of C=A*B, with outer dimensions of (92,92) and inner dimension of 92
+ Test passed!
+ Timings (s)
+ Intrinsic matmul:        0.000378
+ Workshare matmul:        0.000263
+ dgemm:                   0.000044
+ OMP:                     0.000158
+ Testing simple case of C=A*B, with outer dimensions of (94,94) and inner dimension of 94
+ Test passed!
+ Timings (s)
+ Intrinsic matmul:        0.000412
+ Workshare matmul:        0.000273
+ dgemm:                   0.000025
+ OMP:                     0.000161
+ Testing simple case of C=A*B, with outer dimensions of (96,96) and inner dimension of 96
+ Test passed!
+ Timings (s)
+ Intrinsic matmul:        0.000410
+ Workshare matmul:        0.000286
+ dgemm:                   0.000035
+ OMP:                     0.000166
+ Testing simple case of C=A*B, with outer dimensions of (98,98) and inner dimension of 98
+ Test passed!
+ Timings (s)
+ Intrinsic matmul:        0.000434
+ Workshare matmul:        0.000300
+ dgemm:                   0.000048
+ OMP:                     0.000178
+ Testing simple case of C=A*B, with outer dimensions of (100,100) and inner dimension of 100
+ Test passed!
+ Timings (s)
+ Intrinsic matmul:        0.000483
+ Workshare matmul:        0.000330
+ dgemm:                   0.000049
+ OMP:                     0.000189
+ Testing simple case of C=A*B, with outer dimensions of (102,102) and inner dimension of 102
+ Test passed!
+ Timings (s)
+ Intrinsic matmul:        0.000529
+ Workshare matmul:        0.000342
+ dgemm:                   0.000042
+ OMP:                     0.000204
+ Testing simple case of C=A*B, with outer dimensions of (104,104) and inner dimension of 104
+ Test passed!
+ Timings (s)
+ Intrinsic matmul:        0.000525
+ Workshare matmul:        0.000342
+ dgemm:                   0.000040
+ OMP:                     0.000217
+ Testing simple case of C=A*B, with outer dimensions of (106,106) and inner dimension of 106
+ Test passed!
+ Timings (s)
+ Intrinsic matmul:        0.000560
+ Workshare matmul:        0.000360
+ dgemm:                   0.000045
+ OMP:                     0.000226
+ Testing simple case of C=A*B, with outer dimensions of (108,108) and inner dimension of 108
+ Test passed!
+ Timings (s)
+ Intrinsic matmul:        0.000602
+ Workshare matmul:        0.000394
+ dgemm:                   0.000045
+ OMP:                     0.000239
+ Testing simple case of C=A*B, with outer dimensions of (110,110) and inner dimension of 110
+ Test passed!
+ Timings (s)
+ Intrinsic matmul:        0.000659
+ Workshare matmul:        0.000646
+ dgemm:                   0.000055
+ OMP:                     0.000255
+ Testing simple case of C=A*B, with outer dimensions of (112,112) and inner dimension of 112
+ Test passed!
+ Timings (s)
+ Intrinsic matmul:        0.000649
+ Workshare matmul:        0.000424
+ dgemm:                   0.000054
+ OMP:                     0.000262
+ Testing simple case of C=A*B, with outer dimensions of (114,114) and inner dimension of 114
+ Test passed!
+ Timings (s)
+ Intrinsic matmul:        0.000693
+ Workshare matmul:        0.000446
+ dgemm:                   0.000050
+ OMP:                     0.000295
+ Testing simple case of C=A*B, with outer dimensions of (116,116) and inner dimension of 116
+ Test passed!
+ Timings (s)
+ Intrinsic matmul:        0.000742
+ Workshare matmul:        0.000481
+ dgemm:                   0.000048
+ OMP:                     0.000289
+ Testing simple case of C=A*B, with outer dimensions of (118,118) and inner dimension of 118
+ Test passed!
+ Timings (s)
+ Intrinsic matmul:        0.000799
+ Workshare matmul:        0.000508
+ dgemm:                   0.000051
+ OMP:                     0.000309
+ Testing simple case of C=A*B, with outer dimensions of (120,120) and inner dimension of 120
+ Test passed!
+ Timings (s)
+ Intrinsic matmul:        0.000790
+ Workshare matmul:        0.000513
+ dgemm:                   0.000047
+ OMP:                     0.000320
+ Testing simple case of C=A*B, with outer dimensions of (122,122) and inner dimension of 122
+ Test passed!
+ Timings (s)
+ Intrinsic matmul:        0.000831
+ Workshare matmul:        0.000537
+ dgemm:                   0.000064
+ OMP:                     0.000338
+ Testing simple case of C=A*B, with outer dimensions of (124,124) and inner dimension of 124
+ Test passed!
+ Timings (s)
+ Intrinsic matmul:        0.000913
+ Workshare matmul:        0.000577
+ dgemm:                   0.000064
+ OMP:                     0.000353
+ Testing simple case of C=A*B, with outer dimensions of (126,126) and inner dimension of 126
+ Test passed!
+ Timings (s)
+ Intrinsic matmul:        0.000953
+ Workshare matmul:        0.000609
+ dgemm:                   0.000058
+ OMP:                     0.000370
+ Testing simple case of C=A*B, with outer dimensions of (128,128) and inner dimension of 128
+ Test passed!
+ Timings (s)
+ Intrinsic matmul:        0.000965
+ Workshare matmul:        0.000987
+ dgemm:                   0.000064
+ OMP:                     0.000508
+ Testing simple case of C=A*B, with outer dimensions of (130,130) and inner dimension of 130
+ Test passed!
+ Timings (s)
+ Intrinsic matmul:        0.000996
+ Workshare matmul:        0.000650
+ dgemm:                   0.000155
+ OMP:                     0.000431
+ Testing simple case of C=A*B, with outer dimensions of (132,132) and inner dimension of 132
+ Test passed!
+ Timings (s)
+ Intrinsic matmul:        0.001070
+ Workshare matmul:        0.000694
+ dgemm:                   0.000144
+ OMP:                     0.000437
+ Testing simple case of C=A*B, with outer dimensions of (134,134) and inner dimension of 134
+ Test passed!
+ Timings (s)
+ Intrinsic matmul:        0.001133
+ Workshare matmul:        0.000728
+ dgemm:                   0.000137
+ OMP:                     0.000457
+ Testing simple case of C=A*B, with outer dimensions of (136,136) and inner dimension of 136
+ Test passed!
+ Timings (s)
+ Intrinsic matmul:        0.001145
+ Workshare matmul:        0.001166
+ dgemm:                   0.000151
+ OMP:                     0.000476
+ Testing simple case of C=A*B, with outer dimensions of (138,138) and inner dimension of 138
+ Test passed!
+ Timings (s)
+ Intrinsic matmul:        0.001196
+ Workshare matmul:        0.000767
+ dgemm:                   0.000157
+ OMP:                     0.000503
+ Testing simple case of C=A*B, with outer dimensions of (140,140) and inner dimension of 140
+ Test passed!
+ Timings (s)
+ Intrinsic matmul:        0.001256
+ Workshare matmul:        0.000827
+ dgemm:                   0.000181
+ OMP:                     0.000529
+ Testing simple case of C=A*B, with outer dimensions of (142,142) and inner dimension of 142
+ Test passed!
+ Timings (s)
+ Intrinsic matmul:        0.001324
+ Workshare matmul:        0.001361
+ dgemm:                   0.000208
+ OMP:                     0.000557
+ Testing simple case of C=A*B, with outer dimensions of (144,144) and inner dimension of 144
+ Test passed!
+ Timings (s)
+ Intrinsic matmul:        0.001348
+ Workshare matmul:        0.000874
+ dgemm:                   0.000233
+ OMP:                     0.000578
+ Testing simple case of C=A*B, with outer dimensions of (146,146) and inner dimension of 146
+ Test passed!
+ Timings (s)
+ Intrinsic matmul:        0.001374
+ Workshare matmul:        0.001425
+ dgemm:                   0.000149
+ OMP:                     0.000607
+ Testing simple case of C=A*B, with outer dimensions of (148,148) and inner dimension of 148
+ Test passed!
+ Timings (s)
+ Intrinsic matmul:        0.001481
+ Workshare matmul:        0.001525
+ dgemm:                   0.000171
+ OMP:                     0.000635
+ Testing simple case of C=A*B, with outer dimensions of (150,150) and inner dimension of 150
+ Test passed!
+ Timings (s)
+ Intrinsic matmul:        0.001553
+ Workshare matmul:        0.002678
+ dgemm:                   0.000142
+ OMP:                     0.000992
+ Testing simple case of C=A*B, with outer dimensions of (152,152) and inner dimension of 152
+ Test passed!
+ Timings (s)
+ Intrinsic matmul:        0.002670
+ Workshare matmul:        0.001042
+ dgemm:                   0.000187
+ OMP:                     0.001034
+ Testing simple case of C=A*B, with outer dimensions of (154,154) and inner dimension of 154
+ Test passed!
+ Timings (s)
+ Intrinsic matmul:        0.002717
+ Workshare matmul:        0.002054
+ dgemm:                   0.000162
+ OMP:                     0.000397
+ Testing simple case of C=A*B, with outer dimensions of (156,156) and inner dimension of 156
+ Test passed!
+ Timings (s)
+ Intrinsic matmul:        0.001093
+ Workshare matmul:        0.001140
+ dgemm:                   0.000112
+ OMP:                     0.000421
+ Testing simple case of C=A*B, with outer dimensions of (158,158) and inner dimension of 158
+ Test passed!
+ Timings (s)
+ Intrinsic matmul:        0.001131
+ Workshare matmul:        0.001174
+ dgemm:                   0.000182
+ OMP:                     0.000444
+ Testing simple case of C=A*B, with outer dimensions of (160,160) and inner dimension of 160
+ Test passed!
+ Timings (s)
+ Intrinsic matmul:        0.001143
+ Workshare matmul:        0.001196
+ dgemm:                   0.000157
+ OMP:                     0.000668
+ Testing simple case of C=A*B, with outer dimensions of (162,162) and inner dimension of 162
+ Test passed!
+ Timings (s)
+ Intrinsic matmul:        0.001173
+ Workshare matmul:        0.001238
+ dgemm:                   0.000124
+ OMP:                     0.000469
+ Testing simple case of C=A*B, with outer dimensions of (164,164) and inner dimension of 164
+ Test passed!
+ Timings (s)
+ Intrinsic matmul:        0.001301
+ Workshare matmul:        0.001347
+ dgemm:                   0.000170
+ OMP:                     0.000492
+ Testing simple case of C=A*B, with outer dimensions of (166,166) and inner dimension of 166
+ Test passed!
+ Timings (s)
+ Intrinsic matmul:        0.001312
+ Workshare matmul:        0.001358
+ dgemm:                   0.000187
+ OMP:                     0.000510
+ Testing simple case of C=A*B, with outer dimensions of (168,168) and inner dimension of 168
+ Test passed!
+ Timings (s)
+ Intrinsic matmul:        0.001335
+ Workshare matmul:        0.001379
+ dgemm:                   0.000166
+ OMP:                     0.000536
+ Testing simple case of C=A*B, with outer dimensions of (170,170) and inner dimension of 170
+ Test passed!
+ Timings (s)
+ Intrinsic matmul:        0.001381
+ Workshare matmul:        0.001421
+ dgemm:                   0.000138
+ OMP:                     0.000546
+ Testing simple case of C=A*B, with outer dimensions of (172,172) and inner dimension of 172
+ Test passed!
+ Timings (s)
+ Intrinsic matmul:        0.001493
+ Workshare matmul:        0.001569
+ dgemm:                   0.000164
+ OMP:                     0.000575
+ Testing simple case of C=A*B, with outer dimensions of (174,174) and inner dimension of 174
+ Test passed!
+ Timings (s)
+ Intrinsic matmul:        0.001548
+ Workshare matmul:        0.001606
+ dgemm:                   0.000137
+ OMP:                     0.000586
+ Testing simple case of C=A*B, with outer dimensions of (176,176) and inner dimension of 176
+ Test passed!
+ Timings (s)
+ Intrinsic matmul:        0.001581
+ Workshare matmul:        0.001647
+ dgemm:                   0.000182
+ OMP:                     0.000632
+ Testing simple case of C=A*B, with outer dimensions of (178,178) and inner dimension of 178
+ Test passed!
+ Timings (s)
+ Intrinsic matmul:        0.001600
+ Workshare matmul:        0.001667
+ dgemm:                   0.000198
+ OMP:                     0.000616
+ Testing simple case of C=A*B, with outer dimensions of (180,180) and inner dimension of 180
+ Test passed!
+ Timings (s)
+ Intrinsic matmul:        0.001859
+ Workshare matmul:        0.001917
+ dgemm:                   0.000193
+ OMP:                     0.000644
+ Testing simple case of C=A*B, with outer dimensions of (182,182) and inner dimension of 182
+ Test passed!
+ Timings (s)
+ Intrinsic matmul:        0.001730
+ Workshare matmul:        0.001798
+ dgemm:                   0.000194
+ OMP:                     0.000656
+ Testing simple case of C=A*B, with outer dimensions of (184,184) and inner dimension of 184
+ Test passed!
+ Timings (s)
+ Intrinsic matmul:        0.001776
+ Workshare matmul:        0.001872
+ dgemm:                   0.000189
+ OMP:                     0.000668
+ Testing simple case of C=A*B, with outer dimensions of (186,186) and inner dimension of 186
+ Test passed!
+ Timings (s)
+ Intrinsic matmul:        0.001851
+ Workshare matmul:        0.001905
+ dgemm:                   0.000207
+ OMP:                     0.000706
+ Testing simple case of C=A*B, with outer dimensions of (188,188) and inner dimension of 188
+ Test passed!
+ Timings (s)
+ Intrinsic matmul:        0.001979
+ Workshare matmul:        0.002049
+ dgemm:                   0.000166
+ OMP:                     0.000729
+ Testing simple case of C=A*B, with outer dimensions of (190,190) and inner dimension of 190
+ Test passed!
+ Timings (s)
+ Intrinsic matmul:        0.002053
+ Workshare matmul:        0.002109
+ dgemm:                   0.000166
+ OMP:                     0.000774
+ Testing simple case of C=A*B, with outer dimensions of (192,192) and inner dimension of 192
+ Test passed!
+ Timings (s)
+ Intrinsic matmul:        0.002131
+ Workshare matmul:        0.002201
+ dgemm:                   0.000202
+ OMP:                     0.001414
+ Testing simple case of C=A*B, with outer dimensions of (194,194) and inner dimension of 194
+ Test passed!
+ Timings (s)
+ Intrinsic matmul:        0.002210
+ Workshare matmul:        0.002251
+ dgemm:                   0.000213
+ OMP:                     0.000823
+ Testing simple case of C=A*B, with outer dimensions of (196,196) and inner dimension of 196
+ Test passed!
+ Timings (s)
+ Intrinsic matmul:        0.002314
+ Workshare matmul:        0.002370
+ dgemm:                   0.000204
+ OMP:                     0.000837
+ Testing simple case of C=A*B, with outer dimensions of (198,198) and inner dimension of 198
+ Test passed!
+ Timings (s)
+ Intrinsic matmul:        0.002403
+ Workshare matmul:        0.002451
+ dgemm:                   0.000203
+ OMP:                     0.000874
+ Testing simple case of C=A*B, with outer dimensions of (200,200) and inner dimension of 200
+ Test passed!
+ Timings (s)
+ Intrinsic matmul:        0.002447
+ Workshare matmul:        0.002498
+ dgemm:                   0.000204
+ OMP:                     0.000900
+ Final time listing
+   10. 9.99999997E-07 1.39100000E-03 2.33169999E-02 1.10000001E-05
+   12. 1.99999999E-06 6.00000021E-06 6.00000021E-06 4.99999987E-06
+   14. 3.00000011E-06 4.99999987E-06 6.00000021E-06 4.99999987E-06
+   16. 3.99999999E-06 4.99999987E-06 3.00000011E-06 6.00000021E-06
+   18. 4.99999987E-06 6.00000021E-06 1.99999999E-06 1.29999999E-05
+   20. 7.00000010E-06 7.00000010E-06 3.99999999E-06 6.00000021E-06
+   22. 9.00000032E-06 7.00000010E-06 9.99999975E-06 1.80000006E-05
+   24. 7.99999998E-06 1.20000004E-05 3.00000011E-06 9.00000032E-06
+   26. 1.20000004E-05 1.40000002E-05 7.00000010E-06 9.99999975E-06
+   28. 1.49999996E-05 1.20000004E-05 6.00000021E-06 1.20000004E-05
+   30. 1.89999992E-05 1.49999996E-05 6.00000021E-06 1.49999996E-05
+   32. 1.70000003E-05 1.49999996E-05 4.99999987E-06 1.40000002E-05
+   34. 2.20000002E-05 1.70000003E-05 7.99999998E-06 1.49999996E-05
+   36. 2.80000004E-05 2.99999992E-05 6.00000021E-06 1.89999992E-05
+   38. 3.40000006E-05 2.30000005E-05 9.99999975E-06 1.99999995E-05
+   40. 3.09999996E-05 2.30000005E-05 7.99999998E-06 2.09999998E-05
+   42. 3.89999987E-05 2.80000004E-05 4.60000010E-05 2.09999998E-05
+   44. 4.80000017E-05 4.99999987E-05 9.99999975E-06 2.49999994E-05
+   46. 5.70000011E-05 3.70000016E-05 9.00000032E-06 2.70000000E-05
+   48. 5.19999994E-05 3.50000009E-05 7.99999998E-06 2.99999992E-05
+   50. 6.19999992E-05 4.19999997E-05 1.20000004E-05 4.40000003E-05
+   52. 7.40000032E-05 4.89999984E-05 9.99999975E-06 3.50000009E-05
+   54. 1.02999998E-04 5.40000001E-05 1.20000004E-05 4.89999984E-05
+   56. 8.09999983E-05 5.40000001E-05 9.99999975E-06 4.09999993E-05
+   58. 9.60000034E-05 5.99999985E-05 1.20000004E-05 4.60000010E-05
+   60. 1.17000003E-04 7.10000022E-05 9.99999975E-06 4.80000017E-05
+   62. 1.28999993E-04 7.89999976E-05 1.20000004E-05 5.19999994E-05
+   64. 1.30999993E-04 7.99999980E-05 1.10000001E-05 5.70000011E-05
+   66. 1.42000004E-04 9.40000027E-05 1.40000002E-05 6.29999995E-05
+   68. 1.65000005E-04 1.10000001E-04 1.40000002E-05 6.80000012E-05
+   70. 1.82999996E-04 1.23000005E-04 1.49999996E-05 7.30000029E-05
+   72. 1.82000003E-04 1.23000005E-04 1.29999999E-05 7.79999973E-05
+   74. 1.93999993E-04 1.34999995E-04 1.60000000E-05 8.49999997E-05
+   76. 2.26999997E-04 1.53999994E-04 1.70000003E-05 9.10000017E-05
+   78. 2.45000003E-04 1.63999997E-04 1.80000006E-05 9.79999968E-05
+   80. 2.43999995E-04 1.63999997E-04 1.70000003E-05 1.00999998E-04
+   82. 2.68000003E-04 1.78000002E-04 1.89999992E-05 1.09000001E-04
+   84. 2.92000012E-04 2.01000003E-04 1.99999995E-05 1.16000003E-04
+   86. 3.22000007E-04 2.18000001E-04 2.20000002E-05 1.40000004E-04
+   88. 3.18000006E-04 2.18000001E-04 1.89999992E-05 1.28000000E-04
+   90. 3.42000014E-04 2.26999997E-04 2.20000002E-05 1.38000003E-04
+   92. 3.77999997E-04 2.62999994E-04 4.40000003E-05 1.57999995E-04
+   94. 4.11999994E-04 2.73000012E-04 2.49999994E-05 1.61000004E-04
+   96. 4.10000008E-04 2.85999995E-04 3.50000009E-05 1.65999998E-04
+   98. 4.33999987E-04 3.00000014E-04 4.80000017E-05 1.78000002E-04
+  100. 4.83000011E-04 3.30000010E-04 4.89999984E-05 1.88999998E-04
+  102. 5.29000012E-04 3.42000014E-04 4.19999997E-05 2.03999996E-04
+  104. 5.24999981E-04 3.42000014E-04 3.99999990E-05 2.16999993E-04
+  106. 5.60000015E-04 3.60000005E-04 4.50000007E-05 2.26000004E-04
+  108. 6.01999986E-04 3.94000002E-04 4.50000007E-05 2.39000001E-04
+  110. 6.59000012E-04 6.45999971E-04 5.50000004E-05 2.54999992E-04
+  112. 6.48999994E-04 4.23999998E-04 5.40000001E-05 2.61999987E-04
+  114. 6.92999980E-04 4.45999991E-04 4.99999987E-05 2.95000005E-04
+  116. 7.42000004E-04 4.80999995E-04 4.80000017E-05 2.88999989E-04
+  118. 7.98999972E-04 5.08000026E-04 5.09999991E-05 3.08999995E-04
+  120. 7.90000020E-04 5.13000006E-04 4.70000014E-05 3.19999992E-04
+  122. 8.30999983E-04 5.37000014E-04 6.39999998E-05 3.38000013E-04
+  124. 9.13000025E-04 5.77000028E-04 6.39999998E-05 3.53000010E-04
+  126. 9.52999981E-04 6.08999981E-04 5.80000014E-05 3.69999994E-04
+  128. 9.65000014E-04 9.86999949E-04 6.39999998E-05 5.08000026E-04
+  130. 9.96000017E-04 6.50000002E-04 1.55000002E-04 4.30999993E-04
+  132. 1.07000000E-03 6.93999988E-04 1.44000005E-04 4.37000010E-04
+  134. 1.13300001E-03 7.28000014E-04 1.36999995E-04 4.56999987E-04
+  136. 1.14499999E-03 1.16600003E-03 1.51000000E-04 4.75999987E-04
+  138. 1.19600003E-03 7.67000020E-04 1.57000002E-04 5.02999988E-04
+  140. 1.25600002E-03 8.27000011E-04 1.80999996E-04 5.29000012E-04
+  142. 1.32399995E-03 1.36100000E-03 2.07999998E-04 5.56999992E-04
+  144. 1.34800002E-03 8.74000019E-04 2.32999999E-04 5.77999977E-04
+  146. 1.37399998E-03 1.42500002E-03 1.49000000E-04 6.07000024E-04
+  148. 1.48099998E-03 1.52499997E-03 1.71000007E-04 6.35000004E-04
+  150. 1.55299995E-03 2.67799990E-03 1.42000004E-04 9.91999987E-04
+  152. 2.67000007E-03 1.04200002E-03 1.86999998E-04 1.03399996E-03
+  154. 2.71699997E-03 2.05400004E-03 1.61999997E-04 3.96999996E-04
+  156. 1.09300006E-03 1.13999995E-03 1.12000002E-04 4.21000004E-04
+  158. 1.13100000E-03 1.17399998E-03 1.82000003E-04 4.44000005E-04
+  160. 1.14299997E-03 1.19600003E-03 1.57000002E-04 6.68000022E-04
+  162. 1.17299997E-03 1.23800000E-03 1.23999998E-04 4.68999991E-04
+  164. 1.30100001E-03 1.34700001E-03 1.69999999E-04 4.92000021E-04
+  166. 1.31199998E-03 1.35799998E-03 1.86999998E-04 5.09999983E-04
+  168. 1.33500004E-03 1.37900002E-03 1.65999998E-04 5.36000007E-04
+  170. 1.38100004E-03 1.42099999E-03 1.38000003E-04 5.46000025E-04
+  172. 1.49299996E-03 1.56899996E-03 1.63999997E-04 5.75000013E-04
+  174. 1.54800003E-03 1.60600001E-03 1.36999995E-04 5.85999980E-04
+  176. 1.58100005E-03 1.64699997E-03 1.82000003E-04 6.31999981E-04
+  178. 1.59999996E-03 1.66700000E-03 1.97999994E-04 6.15999976E-04
+  180. 1.85899995E-03 1.91700005E-03 1.93000000E-04 6.44000014E-04
+  182. 1.73000002E-03 1.79799995E-03 1.93999993E-04 6.55999989E-04
+  184. 1.77600002E-03 1.87200005E-03 1.88999998E-04 6.68000022E-04
+  186. 1.85100001E-03 1.90499995E-03 2.07000005E-04 7.06000021E-04
+  188. 1.97899994E-03 2.04900000E-03 1.65999998E-04 7.29000021E-04
+  190. 2.05300003E-03 2.10899999E-03 1.65999998E-04 7.74000015E-04
+  192. 2.13099993E-03 2.20100000E-03 2.01999996E-04 1.41400006E-03
+  194. 2.21000006E-03 2.25099991E-03 2.13000007E-04 8.22999980E-04
+  196. 2.31399992E-03 2.36999989E-03 2.03999996E-04 8.37000029E-04
+  198. 2.40299990E-03 2.45100004E-03 2.03000003E-04 8.74000019E-04
+  200. 2.44700001E-03 2.49799993E-03 2.03999996E-04 8.99999985E-04

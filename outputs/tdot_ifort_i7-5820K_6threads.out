@@ -1,0 +1,673 @@
+ Now test a tensor contraction: I_e^m t_mi^ea, with outer dimensions of (10,10) and inner 10
+ Test passed!
+ Timings (s)
+ Threaded ddot:                     0.003768
+ OMP with element-wise mult:        0.001330
+ Naive OMP:                         0.000027
+ Now test a tensor contraction: I_e^m t_mi^ea, with outer dimensions of (12,12) and inner 12
+ Test passed!
+ Timings (s)
+ Threaded ddot:                     0.000042
+ OMP with element-wise mult:        0.000034
+ Naive OMP:                         0.000028
+ Now test a tensor contraction: I_e^m t_mi^ea, with outer dimensions of (14,14) and inner 14
+ Test passed!
+ Timings (s)
+ Threaded ddot:                     0.000055
+ OMP with element-wise mult:        0.000045
+ Naive OMP:                         0.000037
+ Now test a tensor contraction: I_e^m t_mi^ea, with outer dimensions of (16,16) and inner 16
+ Test passed!
+ Timings (s)
+ Threaded ddot:                     0.000090
+ OMP with element-wise mult:        0.000059
+ Naive OMP:                         0.000042
+ Now test a tensor contraction: I_e^m t_mi^ea, with outer dimensions of (18,18) and inner 18
+ Test passed!
+ Timings (s)
+ Threaded ddot:                     0.000148
+ OMP with element-wise mult:        0.000076
+ Naive OMP:                         0.000054
+ Now test a tensor contraction: I_e^m t_mi^ea, with outer dimensions of (20,20) and inner 20
+ Test passed!
+ Timings (s)
+ Threaded ddot:                     0.000210
+ OMP with element-wise mult:        0.000170
+ Naive OMP:                         0.000133
+ Now test a tensor contraction: I_e^m t_mi^ea, with outer dimensions of (22,22) and inner 22
+ Test passed!
+ Timings (s)
+ Threaded ddot:                     0.000300
+ OMP with element-wise mult:        0.000227
+ Naive OMP:                         0.000164
+ Now test a tensor contraction: I_e^m t_mi^ea, with outer dimensions of (24,24) and inner 24
+ Test passed!
+ Timings (s)
+ Threaded ddot:                     0.000393
+ OMP with element-wise mult:        0.000157
+ Naive OMP:                         0.000106
+ Now test a tensor contraction: I_e^m t_mi^ea, with outer dimensions of (26,26) and inner 26
+ Test passed!
+ Timings (s)
+ Threaded ddot:                     0.000541
+ OMP with element-wise mult:        0.000260
+ Naive OMP:                         0.000151
+ Now test a tensor contraction: I_e^m t_mi^ea, with outer dimensions of (28,28) and inner 28
+ Test passed!
+ Timings (s)
+ Threaded ddot:                     0.000703
+ OMP with element-wise mult:        0.000336
+ Naive OMP:                         0.000195
+ Now test a tensor contraction: I_e^m t_mi^ea, with outer dimensions of (30,30) and inner 30
+ Test passed!
+ Timings (s)
+ Threaded ddot:                     0.000886
+ OMP with element-wise mult:        0.000378
+ Naive OMP:                         0.000250
+ Now test a tensor contraction: I_e^m t_mi^ea, with outer dimensions of (32,32) and inner 32
+ Test passed!
+ Timings (s)
+ Threaded ddot:                     0.001245
+ OMP with element-wise mult:        0.000380
+ Naive OMP:                         0.000661
+ Now test a tensor contraction: I_e^m t_mi^ea, with outer dimensions of (34,34) and inner 34
+ Test passed!
+ Timings (s)
+ Threaded ddot:                     0.001588
+ OMP with element-wise mult:        0.000291
+ Naive OMP:                         0.000250
+ Now test a tensor contraction: I_e^m t_mi^ea, with outer dimensions of (36,36) and inner 36
+ Test passed!
+ Timings (s)
+ Threaded ddot:                     0.002394
+ OMP with element-wise mult:        0.000390
+ Naive OMP:                         0.000383
+ Now test a tensor contraction: I_e^m t_mi^ea, with outer dimensions of (38,38) and inner 38
+ Test passed!
+ Timings (s)
+ Threaded ddot:                     0.003537
+ OMP with element-wise mult:        0.000559
+ Naive OMP:                         0.000557
+ Now test a tensor contraction: I_e^m t_mi^ea, with outer dimensions of (40,40) and inner 40
+ Test passed!
+ Timings (s)
+ Threaded ddot:                     0.004757
+ OMP with element-wise mult:        0.000684
+ Naive OMP:                         0.000751
+ Now test a tensor contraction: I_e^m t_mi^ea, with outer dimensions of (42,42) and inner 42
+ Test passed!
+ Timings (s)
+ Threaded ddot:                     0.005817
+ OMP with element-wise mult:        0.000862
+ Naive OMP:                         0.000982
+ Now test a tensor contraction: I_e^m t_mi^ea, with outer dimensions of (44,44) and inner 44
+ Test passed!
+ Timings (s)
+ Threaded ddot:                     0.007291
+ OMP with element-wise mult:        0.001112
+ Naive OMP:                         0.001210
+ Now test a tensor contraction: I_e^m t_mi^ea, with outer dimensions of (46,46) and inner 46
+ Test passed!
+ Timings (s)
+ Threaded ddot:                     0.008908
+ OMP with element-wise mult:        0.001369
+ Naive OMP:                         0.001381
+ Now test a tensor contraction: I_e^m t_mi^ea, with outer dimensions of (48,48) and inner 48
+ Test passed!
+ Timings (s)
+ Threaded ddot:                     0.010640
+ OMP with element-wise mult:        0.001531
+ Naive OMP:                         0.001930
+ Now test a tensor contraction: I_e^m t_mi^ea, with outer dimensions of (50,50) and inner 50
+ Test passed!
+ Timings (s)
+ Threaded ddot:                     0.012755
+ OMP with element-wise mult:        0.002756
+ Naive OMP:                         0.002318
+ Now test a tensor contraction: I_e^m t_mi^ea, with outer dimensions of (52,52) and inner 52
+ Test passed!
+ Timings (s)
+ Threaded ddot:                     0.014978
+ OMP with element-wise mult:        0.003068
+ Naive OMP:                         0.002446
+ Now test a tensor contraction: I_e^m t_mi^ea, with outer dimensions of (54,54) and inner 54
+ Test passed!
+ Timings (s)
+ Threaded ddot:                     0.017245
+ OMP with element-wise mult:        0.003678
+ Naive OMP:                         0.003188
+ Now test a tensor contraction: I_e^m t_mi^ea, with outer dimensions of (56,56) and inner 56
+ Test passed!
+ Timings (s)
+ Threaded ddot:                     0.020260
+ OMP with element-wise mult:        0.004129
+ Naive OMP:                         0.003282
+ Now test a tensor contraction: I_e^m t_mi^ea, with outer dimensions of (58,58) and inner 58
+ Test passed!
+ Timings (s)
+ Threaded ddot:                     0.022000
+ OMP with element-wise mult:        0.004714
+ Naive OMP:                         0.003856
+ Now test a tensor contraction: I_e^m t_mi^ea, with outer dimensions of (60,60) and inner 60
+ Test passed!
+ Timings (s)
+ Threaded ddot:                     0.024968
+ OMP with element-wise mult:        0.003944
+ Naive OMP:                         0.003859
+ Now test a tensor contraction: I_e^m t_mi^ea, with outer dimensions of (62,62) and inner 62
+ Test passed!
+ Timings (s)
+ Threaded ddot:                     0.028351
+ OMP with element-wise mult:        0.006631
+ Naive OMP:                         0.005265
+ Now test a tensor contraction: I_e^m t_mi^ea, with outer dimensions of (64,64) and inner 64
+ Test passed!
+ Timings (s)
+ Threaded ddot:                     0.060309
+ OMP with element-wise mult:        0.006045
+ Naive OMP:                         0.010106
+ Now test a tensor contraction: I_e^m t_mi^ea, with outer dimensions of (66,66) and inner 66
+ Test passed!
+ Timings (s)
+ Threaded ddot:                     0.050886
+ OMP with element-wise mult:        0.006307
+ Naive OMP:                         0.006633
+ Now test a tensor contraction: I_e^m t_mi^ea, with outer dimensions of (68,68) and inner 68
+ Test passed!
+ Timings (s)
+ Threaded ddot:                     0.056239
+ OMP with element-wise mult:        0.007692
+ Naive OMP:                         0.008091
+ Now test a tensor contraction: I_e^m t_mi^ea, with outer dimensions of (70,70) and inner 70
+ Test passed!
+ Timings (s)
+ Threaded ddot:                     0.062954
+ OMP with element-wise mult:        0.008469
+ Naive OMP:                         0.008214
+ Now test a tensor contraction: I_e^m t_mi^ea, with outer dimensions of (72,72) and inner 72
+ Test passed!
+ Timings (s)
+ Threaded ddot:                     0.070435
+ OMP with element-wise mult:        0.009017
+ Naive OMP:                         0.009228
+ Now test a tensor contraction: I_e^m t_mi^ea, with outer dimensions of (74,74) and inner 74
+ Test passed!
+ Timings (s)
+ Threaded ddot:                     0.075999
+ OMP with element-wise mult:        0.010043
+ Naive OMP:                         0.010268
+ Now test a tensor contraction: I_e^m t_mi^ea, with outer dimensions of (76,76) and inner 76
+ Test passed!
+ Timings (s)
+ Threaded ddot:                     0.085345
+ OMP with element-wise mult:        0.011305
+ Naive OMP:                         0.010780
+ Now test a tensor contraction: I_e^m t_mi^ea, with outer dimensions of (78,78) and inner 78
+ Test passed!
+ Timings (s)
+ Threaded ddot:                     0.090175
+ OMP with element-wise mult:        0.012297
+ Naive OMP:                         0.011935
+ Now test a tensor contraction: I_e^m t_mi^ea, with outer dimensions of (80,80) and inner 80
+ Test passed!
+ Timings (s)
+ Threaded ddot:                     0.104613
+ OMP with element-wise mult:        0.013180
+ Naive OMP:                         0.015364
+ Now test a tensor contraction: I_e^m t_mi^ea, with outer dimensions of (82,82) and inner 82
+ Test passed!
+ Timings (s)
+ Threaded ddot:                     0.114129
+ OMP with element-wise mult:        0.014773
+ Naive OMP:                         0.014644
+ Now test a tensor contraction: I_e^m t_mi^ea, with outer dimensions of (84,84) and inner 84
+ Test passed!
+ Timings (s)
+ Threaded ddot:                     0.124702
+ OMP with element-wise mult:        0.016297
+ Naive OMP:                         0.015476
+ Now test a tensor contraction: I_e^m t_mi^ea, with outer dimensions of (86,86) and inner 86
+ Test passed!
+ Timings (s)
+ Threaded ddot:                     0.133832
+ OMP with element-wise mult:        0.018395
+ Naive OMP:                         0.017586
+ Now test a tensor contraction: I_e^m t_mi^ea, with outer dimensions of (88,88) and inner 88
+ Test passed!
+ Timings (s)
+ Threaded ddot:                     0.151456
+ OMP with element-wise mult:        0.020682
+ Naive OMP:                         0.020799
+ Now test a tensor contraction: I_e^m t_mi^ea, with outer dimensions of (90,90) and inner 90
+ Test passed!
+ Timings (s)
+ Threaded ddot:                     0.158891
+ OMP with element-wise mult:        0.023990
+ Naive OMP:                         0.021357
+ Now test a tensor contraction: I_e^m t_mi^ea, with outer dimensions of (92,92) and inner 92
+ Test passed!
+ Timings (s)
+ Threaded ddot:                     0.177475
+ OMP with element-wise mult:        0.021278
+ Naive OMP:                         0.023228
+ Now test a tensor contraction: I_e^m t_mi^ea, with outer dimensions of (94,94) and inner 94
+ Test passed!
+ Timings (s)
+ Threaded ddot:                     0.188954
+ OMP with element-wise mult:        0.024247
+ Naive OMP:                         0.025981
+ Now test a tensor contraction: I_e^m t_mi^ea, with outer dimensions of (96,96) and inner 96
+ Test passed!
+ Timings (s)
+ Threaded ddot:                     0.216693
+ OMP with element-wise mult:        0.027343
+ Naive OMP:                         0.045000
+ Now test a tensor contraction: I_e^m t_mi^ea, with outer dimensions of (98,98) and inner 98
+ Test passed!
+ Timings (s)
+ Threaded ddot:                     0.220796
+ OMP with element-wise mult:        0.028366
+ Naive OMP:                         0.031221
+ Now test a tensor contraction: I_e^m t_mi^ea, with outer dimensions of (100,100) and inner 100
+ Test passed!
+ Timings (s)
+ Threaded ddot:                     0.241650
+ OMP with element-wise mult:        0.032005
+ Naive OMP:                         0.033036
+ Now test a tensor contraction: I_e^m t_mi^ea, with outer dimensions of (102,102) and inner 102
+ Test passed!
+ Timings (s)
+ Threaded ddot:                     0.260126
+ OMP with element-wise mult:        0.034703
+ Naive OMP:                         0.038426
+ Now test a tensor contraction: I_e^m t_mi^ea, with outer dimensions of (104,104) and inner 104
+ Test passed!
+ Timings (s)
+ Threaded ddot:                     0.289424
+ OMP with element-wise mult:        0.036749
+ Naive OMP:                         0.044833
+ Now test a tensor contraction: I_e^m t_mi^ea, with outer dimensions of (106,106) and inner 106
+ Test passed!
+ Timings (s)
+ Threaded ddot:                     0.297583
+ OMP with element-wise mult:        0.041514
+ Naive OMP:                         0.044190
+ Now test a tensor contraction: I_e^m t_mi^ea, with outer dimensions of (108,108) and inner 108
+ Test passed!
+ Timings (s)
+ Threaded ddot:                     0.324742
+ OMP with element-wise mult:        0.046373
+ Naive OMP:                         0.045505
+ Now test a tensor contraction: I_e^m t_mi^ea, with outer dimensions of (110,110) and inner 110
+ Test passed!
+ Timings (s)
+ Threaded ddot:                     0.338824
+ OMP with element-wise mult:        0.051901
+ Naive OMP:                         0.052478
+ Now test a tensor contraction: I_e^m t_mi^ea, with outer dimensions of (112,112) and inner 112
+ Test passed!
+ Timings (s)
+ Threaded ddot:                     0.383094
+ OMP with element-wise mult:        0.054422
+ Naive OMP:                         0.064880
+ Now test a tensor contraction: I_e^m t_mi^ea, with outer dimensions of (114,114) and inner 114
+ Test passed!
+ Timings (s)
+ Threaded ddot:                     0.387600
+ OMP with element-wise mult:        0.057382
+ Naive OMP:                         0.059201
+ Now test a tensor contraction: I_e^m t_mi^ea, with outer dimensions of (116,116) and inner 116
+ Test passed!
+ Timings (s)
+ Threaded ddot:                     0.426556
+ OMP with element-wise mult:        0.061509
+ Naive OMP:                         0.060622
+ Now test a tensor contraction: I_e^m t_mi^ea, with outer dimensions of (118,118) and inner 118
+ Test passed!
+ Timings (s)
+ Threaded ddot:                     0.448171
+ OMP with element-wise mult:        0.064527
+ Naive OMP:                         0.065842
+ Now test a tensor contraction: I_e^m t_mi^ea, with outer dimensions of (120,120) and inner 120
+ Test passed!
+ Timings (s)
+ Threaded ddot:                     0.482825
+ OMP with element-wise mult:        0.065876
+ Naive OMP:                         0.077272
+ Now test a tensor contraction: I_e^m t_mi^ea, with outer dimensions of (122,122) and inner 122
+ Test passed!
+ Timings (s)
+ Threaded ddot:                     0.487484
+ OMP with element-wise mult:        0.070457
+ Naive OMP:                         0.074699
+ Now test a tensor contraction: I_e^m t_mi^ea, with outer dimensions of (124,124) and inner 124
+ Test passed!
+ Timings (s)
+ Threaded ddot:                     0.529644
+ OMP with element-wise mult:        0.078844
+ Naive OMP:                         0.080940
+ Now test a tensor contraction: I_e^m t_mi^ea, with outer dimensions of (126,126) and inner 126
+ Test passed!
+ Timings (s)
+ Threaded ddot:                     0.554108
+ OMP with element-wise mult:        0.085747
+ Naive OMP:                         0.094760
+ Now test a tensor contraction: I_e^m t_mi^ea, with outer dimensions of (128,128) and inner 128
+ Test passed!
+ Timings (s)
+ Threaded ddot:                     0.830547
+ OMP with element-wise mult:        0.096133
+ Naive OMP:                         0.410423
+ Now test a tensor contraction: I_e^m t_mi^ea, with outer dimensions of (130,130) and inner 130
+ Test passed!
+ Timings (s)
+ Threaded ddot:                     0.624620
+ OMP with element-wise mult:        0.098816
+ Naive OMP:                         0.095476
+ Now test a tensor contraction: I_e^m t_mi^ea, with outer dimensions of (132,132) and inner 132
+ Test passed!
+ Timings (s)
+ Threaded ddot:                     0.677130
+ OMP with element-wise mult:        0.107413
+ Naive OMP:                         0.100210
+ Now test a tensor contraction: I_e^m t_mi^ea, with outer dimensions of (134,134) and inner 134
+ Test passed!
+ Timings (s)
+ Threaded ddot:                     0.705522
+ OMP with element-wise mult:        0.119348
+ Naive OMP:                         0.108345
+ Now test a tensor contraction: I_e^m t_mi^ea, with outer dimensions of (136,136) and inner 136
+ Test passed!
+ Timings (s)
+ Threaded ddot:                     0.767775
+ OMP with element-wise mult:        0.115531
+ Naive OMP:                         0.130209
+ Now test a tensor contraction: I_e^m t_mi^ea, with outer dimensions of (138,138) and inner 138
+ Test passed!
+ Timings (s)
+ Threaded ddot:                     0.787798
+ OMP with element-wise mult:        0.147893
+ Naive OMP:                         0.138973
+ Now test a tensor contraction: I_e^m t_mi^ea, with outer dimensions of (140,140) and inner 140
+ Test passed!
+ Timings (s)
+ Threaded ddot:                     0.846313
+ OMP with element-wise mult:        0.135750
+ Naive OMP:                         0.134319
+ Now test a tensor contraction: I_e^m t_mi^ea, with outer dimensions of (142,142) and inner 142
+ Test passed!
+ Timings (s)
+ Threaded ddot:                     0.885513
+ OMP with element-wise mult:        0.141330
+ Naive OMP:                         0.329887
+ Now test a tensor contraction: I_e^m t_mi^ea, with outer dimensions of (144,144) and inner 144
+ Test passed!
+ Timings (s)
+ Threaded ddot:                     0.946120
+ OMP with element-wise mult:        0.143532
+ Naive OMP:                         0.210302
+ Now test a tensor contraction: I_e^m t_mi^ea, with outer dimensions of (146,146) and inner 146
+ Test passed!
+ Timings (s)
+ Threaded ddot:                     0.961508
+ OMP with element-wise mult:        0.151231
+ Naive OMP:                         0.159943
+ Now test a tensor contraction: I_e^m t_mi^ea, with outer dimensions of (148,148) and inner 148
+ Test passed!
+ Timings (s)
+ Threaded ddot:                     1.034699
+ OMP with element-wise mult:        0.158774
+ Naive OMP:                         0.166800
+ Now test a tensor contraction: I_e^m t_mi^ea, with outer dimensions of (150,150) and inner 150
+ Test passed!
+ Timings (s)
+ Threaded ddot:                     1.066662
+ OMP with element-wise mult:        0.166275
+ Naive OMP:                         0.175939
+ Now test a tensor contraction: I_e^m t_mi^ea, with outer dimensions of (152,152) and inner 152
+ Test passed!
+ Timings (s)
+ Threaded ddot:                     1.154673
+ OMP with element-wise mult:        0.194939
+ Naive OMP:                         0.206772
+ Now test a tensor contraction: I_e^m t_mi^ea, with outer dimensions of (154,154) and inner 154
+ Test passed!
+ Timings (s)
+ Threaded ddot:                     1.179874
+ OMP with element-wise mult:        0.181187
+ Naive OMP:                         0.193483
+ Now test a tensor contraction: I_e^m t_mi^ea, with outer dimensions of (156,156) and inner 156
+ Test passed!
+ Timings (s)
+ Threaded ddot:                     1.260829
+ OMP with element-wise mult:        0.192203
+ Naive OMP:                         0.205211
+ Now test a tensor contraction: I_e^m t_mi^ea, with outer dimensions of (158,158) and inner 158
+ Test passed!
+ Timings (s)
+ Threaded ddot:                     1.305075
+ OMP with element-wise mult:        0.204666
+ Naive OMP:                         0.215592
+ Now test a tensor contraction: I_e^m t_mi^ea, with outer dimensions of (160,160) and inner 160
+ Test passed!
+ Timings (s)
+ Threaded ddot:                     1.601441
+ OMP with element-wise mult:        0.202045
+ Naive OMP:                         0.353827
+ Now test a tensor contraction: I_e^m t_mi^ea, with outer dimensions of (162,162) and inner 162
+ Test passed!
+ Timings (s)
+ Threaded ddot:                     1.427477
+ OMP with element-wise mult:        0.221062
+ Naive OMP:                         0.236750
+ Now test a tensor contraction: I_e^m t_mi^ea, with outer dimensions of (164,164) and inner 164
+ Test passed!
+ Timings (s)
+ Threaded ddot:                     1.510188
+ OMP with element-wise mult:        0.232243
+ Naive OMP:                         0.245263
+ Now test a tensor contraction: I_e^m t_mi^ea, with outer dimensions of (166,166) and inner 166
+ Test passed!
+ Timings (s)
+ Threaded ddot:                     1.557410
+ OMP with element-wise mult:        0.247753
+ Naive OMP:                         0.253797
+ Now test a tensor contraction: I_e^m t_mi^ea, with outer dimensions of (168,168) and inner 168
+ Test passed!
+ Timings (s)
+ Threaded ddot:                     1.698931
+ OMP with element-wise mult:        0.256635
+ Naive OMP:                         0.300003
+ Now test a tensor contraction: I_e^m t_mi^ea, with outer dimensions of (170,170) and inner 170
+ Test passed!
+ Timings (s)
+ Threaded ddot:                     1.679704
+ OMP with element-wise mult:        0.273607
+ Naive OMP:                         0.286819
+ Now test a tensor contraction: I_e^m t_mi^ea, with outer dimensions of (172,172) and inner 172
+ Test passed!
+ Timings (s)
+ Threaded ddot:                     1.972216
+ OMP with element-wise mult:        0.382830
+ Naive OMP:                         0.511310
+ Now test a tensor contraction: I_e^m t_mi^ea, with outer dimensions of (174,174) and inner 174
+ Test passed!
+ Timings (s)
+ Threaded ddot:                     1.826521
+ OMP with element-wise mult:        0.337269
+ Naive OMP:                         0.312053
+ Now test a tensor contraction: I_e^m t_mi^ea, with outer dimensions of (176,176) and inner 176
+ Test passed!
+ Timings (s)
+ Threaded ddot:                     1.953017
+ OMP with element-wise mult:        0.341489
+ Naive OMP:                         0.523267
+ Now test a tensor contraction: I_e^m t_mi^ea, with outer dimensions of (178,178) and inner 178
+ Test passed!
+ Timings (s)
+ Threaded ddot:                     1.987269
+ OMP with element-wise mult:        0.321795
+ Naive OMP:                         0.352331
+ Now test a tensor contraction: I_e^m t_mi^ea, with outer dimensions of (180,180) and inner 180
+ Test passed!
+ Timings (s)
+ Threaded ddot:                     2.090264
+ OMP with element-wise mult:        0.348945
+ Naive OMP:                         0.352519
+ Now test a tensor contraction: I_e^m t_mi^ea, with outer dimensions of (182,182) and inner 182
+ Test passed!
+ Timings (s)
+ Threaded ddot:                     2.160427
+ OMP with element-wise mult:        0.376003
+ Naive OMP:                         0.367894
+ Now test a tensor contraction: I_e^m t_mi^ea, with outer dimensions of (184,184) and inner 184
+ Test passed!
+ Timings (s)
+ Threaded ddot:                     2.320577
+ OMP with element-wise mult:        0.379483
+ Naive OMP:                         0.427680
+ Now test a tensor contraction: I_e^m t_mi^ea, with outer dimensions of (186,186) and inner 186
+ Test passed!
+ Timings (s)
+ Threaded ddot:                     2.329365
+ OMP with element-wise mult:        0.384749
+ Naive OMP:                         0.398014
+ Now test a tensor contraction: I_e^m t_mi^ea, with outer dimensions of (188,188) and inner 188
+ Test passed!
+ Timings (s)
+ Threaded ddot:                     2.499119
+ OMP with element-wise mult:        0.398878
+ Naive OMP:                         0.418411
+ Now test a tensor contraction: I_e^m t_mi^ea, with outer dimensions of (190,190) and inner 190
+ Test passed!
+ Timings (s)
+ Threaded ddot:                     2.544268
+ OMP with element-wise mult:        0.405104
+ Naive OMP:                         0.430175
+ Now test a tensor contraction: I_e^m t_mi^ea, with outer dimensions of (192,192) and inner 192
+ Test passed!
+ Timings (s)
+ Threaded ddot:                     3.364387
+ OMP with element-wise mult:        0.412422
+ Naive OMP:                         1.702604
+ Now test a tensor contraction: I_e^m t_mi^ea, with outer dimensions of (194,194) and inner 194
+ Test passed!
+ Timings (s)
+ Threaded ddot:                     2.753382
+ OMP with element-wise mult:        0.425879
+ Naive OMP:                         0.469336
+ Now test a tensor contraction: I_e^m t_mi^ea, with outer dimensions of (196,196) and inner 196
+ Test passed!
+ Timings (s)
+ Threaded ddot:                     2.950539
+ OMP with element-wise mult:        0.439753
+ Naive OMP:                         0.487286
+ Now test a tensor contraction: I_e^m t_mi^ea, with outer dimensions of (198,198) and inner 198
+ Test passed!
+ Timings (s)
+ Threaded ddot:                     3.026065
+ OMP with element-wise mult:        0.466547
+ Naive OMP:                         0.507527
+ Now test a tensor contraction: I_e^m t_mi^ea, with outer dimensions of (200,200) and inner 200
+ Test passed!
+ Timings (s)
+ Threaded ddot:                     3.243473
+ OMP with element-wise mult:        0.471646
+ Naive OMP:                         0.600569
+ Final time listing
+   10. 3.76800005E-03 1.33000000E-03 2.70000000E-05
+   12. 4.19999997E-05 3.40000006E-05 2.80000004E-05
+   14. 5.50000004E-05 4.50000007E-05 3.70000016E-05
+   16. 9.00000014E-05 5.90000018E-05 4.19999997E-05
+   18. 1.48000006E-04 7.59999966E-05 5.40000001E-05
+   20. 2.09999998E-04 1.69999999E-04 1.32999994E-04
+   22. 3.00000014E-04 2.26999997E-04 1.63999997E-04
+   24. 3.92999995E-04 1.57000002E-04 1.06000000E-04
+   26. 5.40999987E-04 2.60000001E-04 1.51000000E-04
+   28. 7.02999998E-04 3.35999997E-04 1.95000001E-04
+   30. 8.85999994E-04 3.77999997E-04 2.50000012E-04
+   32. 1.24500005E-03 3.80000012E-04 6.61000027E-04
+   34. 1.58799998E-03 2.91000004E-04 2.50000012E-04
+   36. 2.39400007E-03 3.90000001E-04 3.83000006E-04
+   38. 3.53699992E-03 5.59000007E-04 5.56999992E-04
+   40. 4.75700013E-03 6.84000028E-04 7.51000014E-04
+   42. 5.81699982E-03 8.61999986E-04 9.82000027E-04
+   44. 7.29099987E-03 1.11199997E-03 1.21000002E-03
+   46. 8.90799984E-03 1.36899995E-03 1.38100004E-03
+   48. 1.06400000E-02 1.53100002E-03 1.93000003E-03
+   50. 1.27550000E-02 2.75600003E-03 2.31799996E-03
+   52. 1.49780000E-02 3.06800008E-03 2.44600000E-03
+   54. 1.72450002E-02 3.67800007E-03 3.18800006E-03
+   56. 2.02600006E-02 4.12900001E-03 3.28200008E-03
+   58. 2.19999999E-02 4.71400004E-03 3.85600002E-03
+   60. 2.49680001E-02 3.94400023E-03 3.85900005E-03
+   62. 2.83509996E-02 6.63099997E-03 5.26499981E-03
+   64. 6.03090003E-02 6.04500016E-03 1.01060001E-02
+   66. 5.08860014E-02 6.30699983E-03 6.63299998E-03
+   68. 5.62390015E-02 7.69199990E-03 8.09099991E-03
+   70. 6.29540011E-02 8.46900046E-03 8.21399968E-03
+   72. 7.04350024E-02 9.01699997E-03 9.22800042E-03
+   74. 7.59989992E-02 1.00429999E-02 1.02680000E-02
+   76. 8.53450000E-02 1.13049997E-02 1.07800001E-02
+   78. 9.01750028E-02 1.22969998E-02 1.19350003E-02
+   80. 1.04612999E-01 1.31799998E-02 1.53639996E-02
+   82. 1.14128999E-01 1.47730000E-02 1.46439997E-02
+   84. 1.24701999E-01 1.62969995E-02 1.54759996E-02
+   86. 1.33831993E-01 1.83949992E-02 1.75860003E-02
+   88. 1.51455998E-01 2.06819996E-02 2.07989998E-02
+   90. 1.58891007E-01 2.39899997E-02 2.13569999E-02
+   92. 1.77475005E-01 2.12779995E-02 2.32280008E-02
+   94. 1.88953996E-01 2.42470000E-02 2.59809997E-02
+   96. 2.16692999E-01 2.73429994E-02 4.50000018E-02
+   98. 2.20796004E-01 2.83659995E-02 3.12210005E-02
+  100. 2.41650000E-01 3.20050009E-02 3.30360010E-02
+  102. 2.60125995E-01 3.47030014E-02 3.84260006E-02
+  104. 2.89424002E-01 3.67490016E-02 4.48330007E-02
+  106. 2.97583014E-01 4.15140018E-02 4.41900007E-02
+  108. 3.24741989E-01 4.63729985E-02 4.55049984E-02
+  110. 3.38824004E-01 5.19010015E-02 5.24780005E-02
+  112. 3.83094013E-01 5.44219986E-02 6.48799986E-02
+  114. 3.87600005E-01 5.73819987E-02 5.92009984E-02
+  116. 4.26555991E-01 6.15089983E-02 6.06219992E-02
+  118. 4.48170990E-01 6.45269975E-02 6.58420026E-02
+  120. 4.82825011E-01 6.58759996E-02 7.72719979E-02
+  122. 4.87484008E-01 7.04569966E-02 7.46989995E-02
+  124. 5.29644012E-01 7.88440034E-02 8.09400007E-02
+  126. 5.54108024E-01 8.57470036E-02 9.47600007E-02
+  128. 8.30546975E-01 9.61330011E-02 4.10423011E-01
+  130. 6.24620020E-01 9.88159999E-02 9.54760015E-02
+  132. 6.77129984E-01 1.07413001E-01 1.00210004E-01
+  134. 7.05522001E-01 1.19347997E-01 1.08345002E-01
+  136. 7.67774999E-01 1.15530998E-01 1.30208999E-01
+  138. 7.87797987E-01 1.47892997E-01 1.38972998E-01
+  140. 8.46313000E-01 1.35749996E-01 1.34319007E-01
+  142. 8.85513008E-01 1.41330004E-01 3.29887003E-01
+  144. 9.46120024E-01 1.43531993E-01 2.10301995E-01
+  146. 9.61507976E-01 1.51231006E-01 1.59942999E-01
+  148. 1.03469896E+00 1.58774003E-01 1.66800007E-01
+  150. 1.06666195E+00 1.66274995E-01 1.75938994E-01
+  152. 1.15467298E+00 1.94939002E-01 2.06772000E-01
+  154. 1.17987394E+00 1.81187004E-01 1.93482995E-01
+  156. 1.26082897E+00 1.92203000E-01 2.05210999E-01
+  158. 1.30507505E+00 2.04666004E-01 2.15591997E-01
+  160. 1.60144103E+00 2.02044994E-01 3.53827000E-01
+  162. 1.42747700E+00 2.21062005E-01 2.36750007E-01
+  164. 1.51018798E+00 2.32243001E-01 2.45262995E-01
+  166. 1.55741000E+00 2.47752994E-01 2.53796995E-01
+  168. 1.69893098E+00 2.56635010E-01 3.00002992E-01
+  170. 1.67970395E+00 2.73606986E-01 2.86819011E-01
+  172. 1.97221601E+00 3.82829994E-01 5.11309981E-01
+  174. 1.82652104E+00 3.37269008E-01 3.12052995E-01
+  176. 1.95301700E+00 3.41488987E-01 5.23266971E-01
+  178. 1.98726904E+00 3.21794987E-01 3.52331012E-01
+  180. 2.09026408E+00 3.48944992E-01 3.52519006E-01
+  182. 2.16042709E+00 3.76002997E-01 3.67893994E-01
+  184. 2.32057691E+00 3.79483014E-01 4.27679986E-01
+  186. 2.32936502E+00 3.84748995E-01 3.98014009E-01
+  188. 2.49911904E+00 3.98878008E-01 4.18410987E-01
+  190. 2.54426789E+00 4.05104011E-01 4.30175006E-01
+  192. 3.36438704E+00 4.12422001E-01 1.70260406E+00
+  194. 2.75338197E+00 4.25879002E-01 4.69336003E-01
+  196. 2.95053911E+00 4.39752996E-01 4.87286001E-01
+  198. 3.02606511E+00 4.66547012E-01 5.07526994E-01
+  200. 3.24347305E+00 4.71646011E-01 6.00569010E-01
