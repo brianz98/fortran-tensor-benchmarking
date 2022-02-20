@@ -410,6 +410,7 @@ module tensor_contraction_tests_m
             real(dp), allocatable :: A_tmp(:,:,:,:)
 
             call system_clock(t0)
+            allocate(A_tmp(dim,dim,dim,dim))
             ! Note on reshape usage: eimn->imne would be order=(4,1,2,3) (rank where original indices end up at, in original order)
             A_tmp = reshape(A, (/dim,dim,dim,dim/), order=(/4,1,2,3/))
             call dgemm_wrapper('N','N', dim, dim, dim**2*dim, A_tmp ,B, C)
@@ -429,6 +430,7 @@ module tensor_contraction_tests_m
             real(dp), allocatable :: A_tmp(:,:,:,:)
             
             call system_clock(t0)
+            allocate(A_tmp(dim,dim,dim,dim))
             A_tmp = reshape(A, (/dim,dim,dim,dim/), order=(/4,1,2,3/))
             !$omp parallel do default(none)&
             !$omp schedule(static,50) collapse(2)&
@@ -672,6 +674,7 @@ module tensor_contraction_4d2d_transpose_tests_m
             real(dp), dimension(:,:,:,:), allocatable :: tmp1, tmp2
 
             call system_clock(t0)
+            allocate(tmp1(dim,dim,dim,dim))
             ! Reshape A(i,m,a,b) to tmp1(i,a,b,m)
             tmp1 = reshape(A,(/dim,dim,dim,dim/),order=(/1,4,2,3/))
             allocate(tmp2(dim,dim,dim,dim))
@@ -693,6 +696,7 @@ module tensor_contraction_4d2d_transpose_tests_m
             real(dp), dimension(:,:,:,:), allocatable :: tmp1, tmp2
 
             call system_clock(t0)
+            allocate(tmp1(dim,dim,dim,dim))
             ! Reshape A(i,m,a,b) to tmp1(m,i,a,b)
             tmp1 = reshape(A,(/dim,dim,dim,dim/),order=(/2,1,3,4/))
             call dgemm_wrapper('N','N', dim, dim**2*dim, dim, B, tmp1, C)
