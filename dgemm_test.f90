@@ -858,7 +858,7 @@ program dgemm_test
 
     implicit none
 
-    real(dp), allocatable :: time(:,:)
+    real(dp), dimension(:,:), allocatable :: time_matmul, time_tdot, time_tcontr1, time_tcontr2, time_tcontr3
     integer :: i, j, lo, hi, step, num_steps, dim
 
 
@@ -870,19 +870,33 @@ program dgemm_test
     step = 10
     num_steps = (hi-lo)/step + 1
     j = 1
-    allocate(time(5, num_steps))
+
+    allocate(time_matmul(5, num_steps))
+    allocate(time_tdot(4, num_steps))
+    allocate(time_tcontr1(4, num_steps))
+    allocate(time_tcontr2(4, num_steps))
+    allocate(time_tcontr3(5, num_steps))
+
 
     do i = lo, hi, step
-        time(1, j) = i
-        !call matmul_tests(i, time(2:,j))
-        !call tensor_dot_tests(i, time(2:,j))
-        call tensor_contraction_tests(i, time(2:,j))
-        !call tensor_contraction_4d2d_tests(i, time(2:,j))
-        !call tensor_contraction_4d2d_transpose_tests(i, time(2:,j))
+        time_matmul(1, j) = i
+        time_tdot(1, j) = i
+        time_tcontr1(1, j) = i
+        time_tcontr2(1, j) = i
+        time_tcontr3(1, j) = i
+        call matmul_tests(i, time_matmul(2:,j))
+        call tensor_dot_tests(i, time_tdot(2:,j))
+        call tensor_contraction_tests(i, time_tcontr1(2:,j))
+        call tensor_contraction_4d2d_tests(i, time_tcontr2(2:,j))
+        call tensor_contraction_4d2d_transpose_tests(i, time_tcontr3(2:,j))
         j = j + 1
     end do
 
-    call print_time(time, 3)
+    call print_time(time_matmul, 4)
+    call print_time(time_tdot, 3)
+    call print_time(time_tcontr1, 3)
+    call print_time(time_tcontr2, 3)
+    call print_time(time_tcontr3, 4)
 
     !call workshare_tests()
     !call tensor_dot_tests()
