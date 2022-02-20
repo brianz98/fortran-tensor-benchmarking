@@ -400,7 +400,8 @@ module tensor_contraction_tests_m
 
     contains
 
-        subroutine tensor_contraction_dgemm(A,B,C,t)
+        subroutine tensor_contraction_dgemm(A,B,C,t,dim)
+            integer, intent(in) :: dim
             real(dp), dimension(:,:,:,:), intent(in) :: A,B
             real(dp), dimension(:,:), intent(out) :: C
             integer(kind=8), intent(out) :: t
@@ -410,15 +411,16 @@ module tensor_contraction_tests_m
 
             call system_clock(t0)
             ! Note on reshape usage: eimn->imne would be order=(4,1,2,3) (rank where original indices end up at, in original order)
-            A_tmp = reshape(A, (/nocc,nocc,nocc,nvirt/), order=(/4,1,2,3/))
-            call dgemm_wrapper('N','N', nocc, nvirt, nocc**2*nvirt, A_tmp ,B, C)
+            A_tmp = reshape(A, (/dim,dim,dim,dim/), order=(/4,1,2,3/))
+            call dgemm_wrapper('N','N', dim, dim, dim**2*dim, A_tmp ,B, C)
             call system_clock(t1)
 
             t = t1-t0
 
         end subroutine tensor_contraction_dgemm
 
-        subroutine tensor_contraction_ele_wise(A,B,C,t)
+        subroutine tensor_contraction_ele_wise(A,B,C,t,dim)
+            integer, intent(in) :: dim
             real(dp), dimension(:,:,:,:), intent(in) :: A,B
             real(dp), dimension(:,:), intent(out) :: C
             integer(kind=8), intent(out) :: t
@@ -427,12 +429,12 @@ module tensor_contraction_tests_m
             real(dp), allocatable :: A_tmp(:,:,:,:)
             
             call system_clock(t0)
-            A_tmp = reshape(A, (/nocc,nocc,nocc,nvirt/), order=(/4,1,2,3/))
+            A_tmp = reshape(A, (/dim,dim,dim,dim/), order=(/4,1,2,3/))
             !$omp parallel do default(none)&
             !$omp schedule(static,50) collapse(2)&
-            !$omp shared(A_tmp,B,C)
-            do g = 1, nvirt
-                do i = 1, nocc
+            !$omp shared(A_tmp,B,C,dim)
+            do g = 1, dim
+                do i = 1, dim
                     C(i,g) = sum(A_tmp(i,:,:,:)*B(:,:,:,g))
                 end do
             end do
@@ -444,7 +446,8 @@ module tensor_contraction_tests_m
 
         end subroutine tensor_contraction_ele_wise
 
-        subroutine tensor_contraction_naive_omp(A,B,C,t)
+        subroutine tensor_contraction_naive_omp(A,B,C,t,dim)
+            integer, intent(in) :: dim
             real(dp), dimension(:,:,:,:), intent(in) :: A,B
             real(dp), dimension(:,:), intent(out) :: C
             integer(kind=8), intent(out) :: t
@@ -456,13 +459,13 @@ module tensor_contraction_tests_m
             !$omp parallel do default(none)&
             !$omp schedule(static, 50) collapse(2)&
             !$omp private(tmp)&
-            !$omp shared(A,B,C)
-            do i = 1, nocc
-                do g = 1, nvirt
+            !$omp shared(A,B,C,dim)
+            do i = 1, dim
+                do g = 1, dim
                     tmp = 0.0_dp
-                    do m = 1, nocc
-                        do n = 1, nocc
-                            do h = 1, nvirt
+                    do m = 1, dim
+                        do n = 1, dim
+                            do h = 1, dim
                                 tmp = tmp + A(h,i,m,n)*B(m,n,h,g)
                             end do
                         end do
@@ -477,29 +480,31 @@ module tensor_contraction_tests_m
 
         end subroutine tensor_contraction_naive_omp
 
-        subroutine tensor_contraction_tests()
+        subroutine tensor_contraction_tests(dim, time)
+            integer, intent(in) :: dim
+            real(dp), intent(inout) :: time(:)
 
             integer(kind=8) :: t1, t2, t3, count_rate, count_max
             real(dp), dimension(:,:), allocatable :: A(:,:,:,:),B(:,:,:,:),C
             real(dp) :: c1, c2, c3
 
-            allocate(A(nvirt,nocc,nocc,nocc), source=0.0_dp)
-            allocate(B(nocc,nocc,nvirt,nvirt), source=0.0_dp)
-            allocate(C(nocc,nvirt), source=0.0_dp)
+            allocate(A(dim,dim,dim,dim), source=0.0_dp)
+            allocate(B(dim,dim,dim,dim), source=0.0_dp)
+            allocate(C(dim,dim), source=0.0_dp)
             
             call random_number(A)
             call random_number(B)
 
             write(6,'(1X,A,I0,A,I0,A,I0)') &
-            'Now the case of v_ei^mn t_mn^ea, with outer dimensions of (', nocc,',',nvirt,') and inner ',nocc**2*nvirt
+            'Now the case of v_ei^mn t_mn^ea, with outer dimensions of (', dim,',',dim,') and inner ',dim**2*dim
             call system_clock(count_rate=count_rate, count_max=count_max)
-            call tensor_contraction_dgemm(A,B,C,t1)
+            call tensor_contraction_dgemm(A,B,C,t1,dim)
             c1 = sum(abs(C))/size(C)
             C = 0.0_dp
-            call tensor_contraction_ele_wise(A,B,C,t2)
+            call tensor_contraction_ele_wise(A,B,C,t2,dim)
             c2 = sum(abs(C))/size(C)
             C = 0.0_dp
-            call tensor_contraction_naive_omp(A,B,C,t3)
+            call tensor_contraction_naive_omp(A,B,C,t3,dim)
             c3 = sum(abs(C))/size(C)
             C = 0.0_dp
 
@@ -512,8 +517,11 @@ module tensor_contraction_tests_m
 
             write(6,'(1X,A)') 'Timings (s)'
             write(6,'(1X,A,1X,F15.6)') 'dgemm:                     ',real(t1)/count_rate
+            time(1) = real(t1)/count_rate
             write(6,'(1X,A,1X,F15.6)') 'OMP with element-wise mult:',real(t2)/count_rate
+            time(2) = real(t2)/count_rate
             write(6,'(1X,A,1X,F15.6)') 'Naive OMP:                 ',real(t3)/count_rate
+            time(3) = real(t3)/count_rate
 
         end subroutine tensor_contraction_tests
 end module tensor_contraction_tests_m
@@ -525,21 +533,23 @@ module tensor_contraction_4d2d_tests_m
 
     contains
 
-        subroutine tensor_contraction_4d2d_dgemm(A,B,C,t)
+        subroutine tensor_contraction_4d2d_dgemm(A,B,C,t,dim)
+            integer, intent(in) :: dim
             real(dp), intent(in) :: A(:,:,:,:),B(:,:)
             real(dp), dimension(:,:,:,:), intent(out) :: C
             integer(kind=8), intent(out) :: t
             integer(kind=8) :: t0, t1
 
             call system_clock(t0)
-            call dgemm_wrapper('N','N', nocc**2*nvirt, nvirt, nvirt, A ,B, C)
+            call dgemm_wrapper('N','N', dim**2*dim, dim, dim, A ,B, C)
             call system_clock(t1)
 
             t = t1-t0
 
         end subroutine tensor_contraction_4d2d_dgemm
 
-        subroutine tensor_contraction_4d2d_ele_wise(A,B,C,t)
+        subroutine tensor_contraction_4d2d_ele_wise(A,B,C,t,dim)
+            integer, intent(in) :: dim
             real(dp), intent(in) :: A(:,:,:,:),B(:,:)
             real(dp), dimension(:,:,:,:), intent(out) :: C
             integer(kind=8), intent(out) :: t
@@ -549,11 +559,11 @@ module tensor_contraction_4d2d_tests_m
             call system_clock(t0)
             !$omp parallel do default(none)&
             !$omp schedule(static,50) collapse(2)&
-            !$omp shared(A,B,C)
-            do h = 1, nvirt
-                do g = 1, nvirt
-                    do j = 1, nocc
-                        do i = 1, nocc
+            !$omp shared(A,B,C,dim)
+            do h = 1, dim
+                do g = 1, dim
+                    do j = 1, dim
+                        do i = 1, dim
                             C(i,j,g,h) = sum(A(i,j,g,:)*B(:,h))
                         end do
                     end do
@@ -567,7 +577,8 @@ module tensor_contraction_4d2d_tests_m
 
         end subroutine tensor_contraction_4d2d_ele_wise
 
-        subroutine tensor_contraction_4d2d_naive_omp(A,B,C,t)
+        subroutine tensor_contraction_4d2d_naive_omp(A,B,C,t,dim)
+            integer, intent(in) :: dim
             real(dp), dimension(:,:,:,:), intent(in) :: A,B(:,:)
             real(dp), dimension(:,:,:,:), intent(out) :: C
             integer(kind=8), intent(out) :: t
@@ -578,14 +589,14 @@ module tensor_contraction_4d2d_tests_m
             call system_clock(t0)
             !$omp parallel do default(none)&
             !$omp schedule(static,50) collapse(2)&
-            !$omp shared(A,B,C)&
+            !$omp shared(A,B,C,dim)&
             !$omp private(tmp)
-            do h = 1, nvirt
-                do g = 1, nvirt
-                    do j = 1, nocc
-                        do i = 1, nocc
+            do h = 1, dim
+                do g = 1, dim
+                    do j = 1, dim
+                        do i = 1, dim
                             tmp = 0.0_dp
-                            do e = 1, nvirt
+                            do e = 1, dim
                                 tmp = tmp + A(i,j,g,e)*B(e,h)
                             end do
                             C(i,j,g,h) = tmp
@@ -600,29 +611,30 @@ module tensor_contraction_4d2d_tests_m
 
         end subroutine tensor_contraction_4d2d_naive_omp
 
-        subroutine tensor_contraction_4d2d_tests()
-
+        subroutine tensor_contraction_4d2d_tests(dim, time)
+            integer, intent(in) :: dim
+            real(dp), intent(inout) :: time(:)
             integer(kind=8) :: t1, t2, t3, count_rate, count_max
             real(dp), dimension(:,:,:,:), allocatable :: A,B(:,:),C
             real(dp) :: c1, c2, c3
 
-            allocate(A(nocc,nocc,nvirt,nvirt), source=0.0_dp)
-            allocate(B(nvirt,nvirt), source=0.0_dp)
-            allocate(C(nocc,nocc,nvirt,nvirt), source=0.0_dp)
+            allocate(A(dim,dim,dim,dim), source=0.0_dp)
+            allocate(B(dim,dim), source=0.0_dp)
+            allocate(C(dim,dim,dim,dim), source=0.0_dp)
             
             call random_number(A)
             call random_number(B)
 
             write(6,'(1X,A,I0,A,I0,A,I0)') &
-            'Now the case of t_ij^ae I_e^b, with outer dimensions of (', nocc**2,',',nvirt**2,') and inner ',nvirt
+            'Now the case of t_ij^ae I_e^b, with outer dimensions of (', dim**2,',',dim**2,') and inner ',dim
             call system_clock(count_rate=count_rate, count_max=count_max)
-            call tensor_contraction_4d2d_dgemm(A,B,C,t1)
+            call tensor_contraction_4d2d_dgemm(A,B,C,t1,dim)
             c1 = sum(abs(C))/size(C)
             C = 0.0_dp
-            call tensor_contraction_4d2d_ele_wise(A,B,C,t2)
+            call tensor_contraction_4d2d_ele_wise(A,B,C,t2,dim)
             c2 = sum(abs(C))/size(C)
             C = 0.0_dp
-            call tensor_contraction_4d2d_naive_omp(A,B,C,t3)
+            call tensor_contraction_4d2d_naive_omp(A,B,C,t3,dim)
             c3 = sum(abs(C))/size(C)
             C = 0.0_dp
 
@@ -635,8 +647,11 @@ module tensor_contraction_4d2d_tests_m
 
             write(6,'(1X,A)') 'Timings (s)'
             write(6,'(1X,A,1X,F15.6)') 'dgemm:                     ',real(t1)/count_rate
+            time(1) = real(t1)/count_rate
             write(6,'(1X,A,1X,F15.6)') 'OMP with element-wise mult:',real(t2)/count_rate
+            time(2) = real(t2)/count_rate
             write(6,'(1X,A,1X,F15.6)') 'Naive OMP:                 ',real(t3)/count_rate
+            time(3) = real(t3)/count_rate
 
         end subroutine tensor_contraction_4d2d_tests
 end module tensor_contraction_4d2d_tests_m
@@ -648,7 +663,8 @@ module tensor_contraction_4d2d_transpose_tests_m
 
     contains
 
-        subroutine tensor_contraction_4d2d_transpose_dgemm(A,B,C,t)
+        subroutine tensor_contraction_4d2d_transpose_dgemm(A,B,C,t,dim)
+            integer, intent(in) :: dim
             real(dp), intent(in) :: A(:,:,:,:),B(:,:)
             real(dp), dimension(:,:,:,:), intent(out) :: C
             integer(kind=8), intent(out) :: t
@@ -657,18 +673,19 @@ module tensor_contraction_4d2d_transpose_tests_m
 
             call system_clock(t0)
             ! Reshape A(i,m,a,b) to tmp1(i,a,b,m)
-            tmp1 = reshape(A,(/nocc,nvirt,nvirt,nocc/),order=(/1,4,2,3/))
-            allocate(tmp2(nocc,nvirt,nvirt,nocc))
-            call dgemm_wrapper('N','T', nvirt**2*nocc, nocc, nocc, tmp1 ,B, tmp2)
+            tmp1 = reshape(A,(/dim,dim,dim,dim/),order=(/1,4,2,3/))
+            allocate(tmp2(dim,dim,dim,dim))
+            call dgemm_wrapper('N','T', dim**2*dim, dim, dim, tmp1 ,B, tmp2)
             ! tmp2(i,a,b,j)
-            C = reshape(tmp2,(/nocc,nocc,nvirt,nvirt/),order=(/1,4,3,2/))
+            C = reshape(tmp2,(/dim,dim,dim,dim/),order=(/1,4,3,2/))
             call system_clock(t1)
 
             t = t1-t0
 
         end subroutine tensor_contraction_4d2d_transpose_dgemm
 
-        subroutine tensor_contraction_4d2d_transpose_dgemm_alt(A,B,C,t)
+        subroutine tensor_contraction_4d2d_transpose_dgemm_alt(A,B,C,t,dim)
+            integer, intent(in) :: dim
             real(dp), intent(in) :: A(:,:,:,:),B(:,:)
             real(dp), dimension(:,:,:,:), intent(out) :: C
             integer(kind=8), intent(out) :: t
@@ -677,10 +694,10 @@ module tensor_contraction_4d2d_transpose_tests_m
 
             call system_clock(t0)
             ! Reshape A(i,m,a,b) to tmp1(m,i,a,b)
-            tmp1 = reshape(A,(/nocc,nocc,nvirt,nvirt/),order=(/2,1,3,4/))
-            call dgemm_wrapper('N','N', nocc, nvirt**2*nocc, nocc, B, tmp1, C)
+            tmp1 = reshape(A,(/dim,dim,dim,dim/),order=(/2,1,3,4/))
+            call dgemm_wrapper('N','N', dim, dim**2*dim, dim, B, tmp1, C)
             ! C(j,i,a,b)
-            tmp2 = reshape(C,(/nocc,nocc,nvirt,nvirt/),order=(/2,1,3,4/))
+            tmp2 = reshape(C,(/dim,dim,dim,dim/),order=(/2,1,3,4/))
             C = tmp2
             call system_clock(t1)
 
@@ -688,7 +705,8 @@ module tensor_contraction_4d2d_transpose_tests_m
 
         end subroutine tensor_contraction_4d2d_transpose_dgemm_alt
 
-        subroutine tensor_contraction_4d2d_transpose_ele_wise(A,B,C,t)
+        subroutine tensor_contraction_4d2d_transpose_ele_wise(A,B,C,t,dim)
+            integer, intent(in) :: dim
             real(dp), intent(in) :: A(:,:,:,:),B(:,:)
             real(dp), dimension(:,:,:,:), intent(out) :: C
             integer(kind=8), intent(out) :: t
@@ -698,11 +716,11 @@ module tensor_contraction_4d2d_transpose_tests_m
             call system_clock(t0)
             !$omp parallel do default(none)&
             !$omp schedule(static,50) collapse(2)&
-            !$omp shared(A,B,C)
-            do h = 1, nvirt
-                do g = 1, nvirt
-                    do j = 1, nocc
-                        do i = 1, nocc
+            !$omp shared(A,B,C,dim)
+            do h = 1, dim
+                do g = 1, dim
+                    do j = 1, dim
+                        do i = 1, dim
                             C(i,j,g,h) = sum(A(i,:,g,h)*B(j,:))
                         end do
                     end do
@@ -716,7 +734,8 @@ module tensor_contraction_4d2d_transpose_tests_m
 
         end subroutine tensor_contraction_4d2d_transpose_ele_wise
 
-        subroutine tensor_contraction_4d2d_transpose_naive_omp(A,B,C,t)
+        subroutine tensor_contraction_4d2d_transpose_naive_omp(A,B,C,t,dim)
+            integer, intent(in) :: dim
             real(dp), dimension(:,:,:,:), intent(in) :: A,B(:,:)
             real(dp), dimension(:,:,:,:), intent(out) :: C
             integer(kind=8), intent(out) :: t
@@ -727,14 +746,14 @@ module tensor_contraction_4d2d_transpose_tests_m
             call system_clock(t0)
             !$omp parallel do default(none)&
             !$omp schedule(static,50) collapse(2)&
-            !$omp shared(A,B,C)&
+            !$omp shared(A,B,C,dim)&
             !$omp private(tmp)
-            do h = 1, nvirt
-                do g = 1, nvirt
-                    do j = 1, nocc
-                        do i = 1, nocc
+            do h = 1, dim
+                do g = 1, dim
+                    do j = 1, dim
+                        do i = 1, dim
                             tmp = 0.0_dp
-                            do m = 1, nvirt
+                            do m = 1, dim
                                 tmp = tmp + A(i,m,g,h)*B(j,m)
                             end do
                             C(i,j,g,h) = tmp
@@ -749,33 +768,35 @@ module tensor_contraction_4d2d_transpose_tests_m
 
         end subroutine tensor_contraction_4d2d_transpose_naive_omp
 
-        subroutine tensor_contraction_4d2d_transpose_tests()
+        subroutine tensor_contraction_4d2d_transpose_tests(dim, time)
+            integer, intent(in) :: dim
+            real(dp), intent(inout) :: time(:)
 
-            integer(kind=8) :: t1, t2, t3, count_rate, count_max
+            integer(kind=8) :: t1, t2, t3, t4, count_rate, count_max
             real(dp), dimension(:,:,:,:), allocatable :: A,B(:,:),C
             real(dp) :: c1, c2, c3, c4
 
-            allocate(A(nocc,nocc,nvirt,nvirt), source=0.0_dp)
-            allocate(B(nvirt,nvirt), source=0.0_dp)
-            allocate(C(nocc,nocc,nvirt,nvirt), source=0.0_dp)
+            allocate(A(dim,dim,dim,dim), source=0.0_dp)
+            allocate(B(dim,dim), source=0.0_dp)
+            allocate(C(dim,dim,dim,dim), source=0.0_dp)
             
             call random_number(A)
             call random_number(B)
 
             write(6,'(1X,A,I0,A,I0,A,I0)') &
-            'Now the case of t_im^ab I_j^m, with outer dimensions of (', nocc**2,',',nvirt**2,') and inner ',nvirt
+            'Now the case of t_im^ab I_j^m, with outer dimensions of (', dim**2,',',dim**2,') and inner ',dim
             call system_clock(count_rate=count_rate, count_max=count_max)
-            call tensor_contraction_4d2d_transpose_dgemm(A,B,C,t1)
+            call tensor_contraction_4d2d_transpose_dgemm(A,B,C,t1,dim)
             c1 = sum(abs(C))/size(C)
             C = 0.0_dp
             call system_clock(count_rate=count_rate, count_max=count_max)
-            call tensor_contraction_4d2d_transpose_dgemm_alt(A,B,C,t1)
+            call tensor_contraction_4d2d_transpose_dgemm_alt(A,B,C,t2,dim)
             c2 = sum(abs(C))/size(C)
             C = 0.0_dp
-            call tensor_contraction_4d2d_transpose_ele_wise(A,B,C,t2)
+            call tensor_contraction_4d2d_transpose_ele_wise(A,B,C,t3,dim)
             c3 = sum(abs(C))/size(C)
             C = 0.0_dp
-            call tensor_contraction_4d2d_transpose_naive_omp(A,B,C,t3)
+            call tensor_contraction_4d2d_transpose_naive_omp(A,B,C,t4,dim)
             c4 = sum(abs(C))/size(C)
             C = 0.0_dp
 
@@ -788,9 +809,13 @@ module tensor_contraction_4d2d_transpose_tests_m
 
             write(6,'(1X,A)') 'Timings (s)'
             write(6,'(1X,A,1X,F15.6)') 'dgemm:                     ',real(t1)/count_rate
-            write(6,'(1X,A,1X,F15.6)') 'dgemm alternative:         ',real(t1)/count_rate
-            write(6,'(1X,A,1X,F15.6)') 'OMP with element-wise mult:',real(t2)/count_rate
-            write(6,'(1X,A,1X,F15.6)') 'Naive OMP:                 ',real(t3)/count_rate
+            time(1) = real(t1)/count_rate
+            write(6,'(1X,A,1X,F15.6)') 'dgemm alternative:         ',real(t2)/count_rate
+            time(2) = real(t2)/count_rate
+            write(6,'(1X,A,1X,F15.6)') 'OMP with element-wise mult:',real(t3)/count_rate
+            time(3) = real(t3)/count_rate
+            write(6,'(1X,A,1X,F15.6)') 'Naive OMP:                 ',real(t4)/count_rate
+            time(4) = real(t4)/count_rate
 
         end subroutine tensor_contraction_4d2d_transpose_tests
 end module tensor_contraction_4d2d_transpose_tests_m
@@ -846,7 +871,10 @@ program dgemm_test
     do i = lo, hi, step
         time(1, j) = i
         !call matmul_tests(i, time(2:,j))
-        call tensor_dot_tests(i, time(2:,j))
+        !call tensor_dot_tests(i, time(2:,j))
+        call tensor_contraction_tests(i, time(2:,j))
+        !call tensor_contraction_4d2d_tests(i, time(2:,j))
+        !call tensor_contraction_4d2d_transpose_tests(i, time(2:,j))
         j = j + 1
     end do
 
