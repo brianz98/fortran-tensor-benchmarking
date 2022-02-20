@@ -61,22 +61,24 @@ module matmul_tests_m
 
         end subroutine matmul_workshare
 
-        subroutine matmul_dgemm(A,B,C,t)
+        subroutine matmul_dgemm(A,B,C,t, dim)
             real(dp), dimension(:,:), intent(in) :: A, B
+            integer, intent(in) :: dim
             real(dp), dimension(:,:), intent(out) :: C
             integer(kind=8), intent(out) :: t
             integer(kind=8) :: t0, t1
             
             call system_clock(t0)
-            call dgemm_wrapper('N','N', nocc, nvirt, nvirt, A, B, C)
+            call dgemm_wrapper('N','N', dim, dim, dim, A, B, C)
             call system_clock(t1)
             
             t = t1-t0
 
         end subroutine matmul_dgemm
 
-        subroutine matmul_omp(A,B,C,t)
+        subroutine matmul_omp(A,B,C,t,dim)
             real(dp), dimension(:,:), intent(in) :: A, B
+            integer, intent(in) :: dim
             real(dp), dimension(:,:), intent(out) :: C
             integer(kind=8), intent(out) :: t
             integer(kind=8) :: t0, t1
@@ -85,9 +87,9 @@ module matmul_tests_m
             call system_clock(t0)
             !$omp parallel do default(none) &
             !$omp schedule(static, 50) collapse(2) &
-            !$omp shared(C, A, B)
-            do i = 1, nocc
-                do g = 1, nvirt
+            !$omp shared(C, A, B, dim)
+            do i = 1, dim
+                do g = 1, dim
                     C(i,g) = dot_product(A(i,:),B(:,g))
                 end do
             end do
@@ -98,29 +100,31 @@ module matmul_tests_m
 
         end subroutine matmul_omp
 
-        subroutine matmul_tests()
+        subroutine matmul_tests(dim, time)
+            integer, intent(in) :: dim
+            real(dp), intent(inout) :: time(:)
 
             integer(kind=8) :: t1, t2, t3, t4, count_rate, count_max
             real(dp), dimension(:,:), allocatable :: A,B,C
             real(dp) :: c1, c2, c3, c4
 
-            allocate(A(nocc,nvirt), source=0.0_dp)
-            allocate(B(nvirt,nvirt), source=0.0_dp)
+            allocate(A(dim,dim), source=0.0_dp)
+            allocate(B(dim,dim), source=0.0_dp)
             allocate(C, source=A)
             
             call random_number(A)
             call random_number(B)
 
             write(6,'(1X,A,I0,A,I0,A,I0)') &
-            'Testing simple case of C=A*B, with outer dimensions of (', nocc,',',nvirt,') and inner dimension of ',nvirt
+            'Testing simple case of C=A*B, with outer dimensions of (', dim,',',dim,') and inner dimension of ',dim
             call system_clock(count_rate=count_rate, count_max=count_max)
             call matmul_intrinsic(A,B,C,t1)
             c1 = sum(abs(C))/size(C)
             call matmul_workshare(A,B,C,t2)
             c2 = sum(abs(C))/size(C)
-            call matmul_dgemm(A,B,C,t3)
+            call matmul_dgemm(A,B,C,t3,dim)
             c3 = sum(abs(C))/size(C)
-            call matmul_omp(A,B,C,t4)
+            call matmul_omp(A,B,C,t4,dim)
             c4 = sum(abs(C))/size(C)
 
             if (stdev((/c1,c2,c3,c4/)) < 1e-5) then
@@ -132,9 +136,15 @@ module matmul_tests_m
 
             write(6,'(1X,A)') 'Timings (s)'
             write(6,'(1X,A,1X,F15.6)') 'Intrinsic matmul:',real(t1)/count_rate
+            time(1) = real(t1)/count_rate
             write(6,'(1X,A,1X,F15.6)') 'Workshare matmul:',real(t2)/count_rate
+            time(2) = real(t2)/count_rate
             write(6,'(1X,A,1X,F15.6)') 'dgemm:           ',real(t3)/count_rate
+            time(3) = real(t3)/count_rate
             write(6,'(1X,A,1X,F15.6)') 'OMP:             ',real(t4)/count_rate
+            time(4) = real(t4)/count_rate
+
+            deallocate(A, B, C)
 
         end subroutine matmul_tests
 end module matmul_tests_m
@@ -249,7 +259,8 @@ module tensor_dot_tests_m
 
     contains
 
-        subroutine tensor_dot_ddot(A,B,C,t)
+        subroutine tensor_dot_ddot(A,B,C,t,dim)
+            integer, intent(in) :: dim
             real(dp), dimension(:,:), intent(in) :: A
             real(dp), dimension(:,:,:,:), intent(in) :: B
             real(dp), dimension(:,:), intent(out) :: C
@@ -259,8 +270,8 @@ module tensor_dot_tests_m
             integer :: i, g
 
             call system_clock(t0)
-            do g = 1, nvirt
-                do i = 1, nocc
+            do g = 1, dim
+                do i = 1, dim
                     C(i, g) = ddot(size(A), transpose(A), 1, B(:,i,:,g), 1)
                 end do
             end do
@@ -270,7 +281,8 @@ module tensor_dot_tests_m
 
         end subroutine tensor_dot_ddot
 
-        subroutine tensor_dot_ele_wise_omp(A,B,C,t)
+        subroutine tensor_dot_ele_wise_omp(A,B,C,t,dim)
+            integer, intent(in) :: dim
             real(dp), dimension(:,:), intent(in) :: A
             real(dp), dimension(:,:,:,:), intent(in) :: B
             real(dp), dimension(:,:), intent(out) :: C
@@ -284,10 +296,10 @@ module tensor_dot_tests_m
 
             A_tmp = transpose(A)
             !$omp parallel default(none)&
-            !$omp shared(A_tmp, B, C)
+            !$omp shared(A_tmp, B, C, dim)
             !$omp do schedule(static,50) collapse(2)
-            do i = 1, nocc
-                do g = 1, nvirt
+            do i = 1, dim
+                do g = 1, dim
                     C(i,g) = sum(A_tmp(:,:) * B(:,i,:,g))
                 end do
             end do
@@ -300,7 +312,9 @@ module tensor_dot_tests_m
 
         end subroutine tensor_dot_ele_wise_omp
 
-        subroutine tensor_dot_naive_omp(A,B,C,t)
+        subroutine tensor_dot_naive_omp(A,B,C,t,dim)
+
+            integer, intent(in) :: dim
             real(dp), dimension(:,:), intent(in) :: A
             real(dp), dimension(:,:,:,:), intent(in) :: B
             real(dp), dimension(:,:), intent(out) :: C
@@ -312,13 +326,13 @@ module tensor_dot_tests_m
             call system_clock(t0)
             !$omp parallel do default(none)&
             !$omp schedule(static,50) collapse(2)&
-            !$omp shared(A, B, C) &
+            !$omp shared(A, B, C, dim) &
             !$omp private(tmp)
-            do i = 1, nocc
-                do g = 1, nvirt
+            do i = 1, dim
+                do g = 1, dim
                     tmp = 0.0_dp
-                    do h = 1,nvirt
-                        do m = 1, nocc
+                    do h = 1,dim
+                        do m = 1, dim
                             tmp = tmp+A(h,m)*B(m,i,h,g)
                         end do
                     end do
@@ -332,29 +346,32 @@ module tensor_dot_tests_m
 
         end subroutine tensor_dot_naive_omp
 
-        subroutine tensor_dot_tests()
+        subroutine tensor_dot_tests(dim, time)
+
+            integer, intent(in) :: dim
+            real(dp), intent(inout) :: time(:)
 
             integer(kind=8) :: t1, t2, t3, count_rate, count_max
             real(dp), dimension(:,:), allocatable :: A,B(:,:,:,:),C
             real(dp) :: c1, c2, c3
 
-            allocate(A(nvirt,nvirt), source=0.0_dp)
-            allocate(B(nocc,nocc,nvirt,nvirt), source=0.0_dp)
-            allocate(C(nocc,nvirt), source=0.0_dp)
+            allocate(A(dim,dim), source=0.0_dp)
+            allocate(B(dim,dim,dim,dim), source=0.0_dp)
+            allocate(C(dim,dim), source=0.0_dp)
             
             call random_number(A)
             call random_number(B)
 
             write(6,'(1X,A,I0,A,I0,A,I0)') &
-            'Now test a tensor contraction: I_e^m t_mi^ea, with outer dimensions of (', nocc,',',nvirt,') and inner ',nvirt
+            'Now test a tensor contraction: I_e^m t_mi^ea, with outer dimensions of (', dim,',',dim,') and inner ',dim
             call system_clock(count_rate=count_rate, count_max=count_max)
-            call tensor_dot_ddot(A,B,C,t1)
+            call tensor_dot_ddot(A,B,C,t1,dim)
             c1 = sum(abs(C))/size(C)
             C = 0.0_dp
-            call tensor_dot_ele_wise_omp(A,B,C,t2)
+            call tensor_dot_ele_wise_omp(A,B,C,t2,dim)
             c2 = sum(abs(C))/size(C)
             C = 0.0_dp
-            call tensor_dot_naive_omp(A,B,C,t3)
+            call tensor_dot_naive_omp(A,B,C,t3,dim)
             c3 = sum(abs(C))/size(C)
             C = 0.0_dp
 
@@ -367,8 +384,11 @@ module tensor_dot_tests_m
 
             write(6,'(1X,A)') 'Timings (s)'
             write(6,'(1X,A,1X,F15.6)') 'Threaded ddot:             ',real(t1)/count_rate
+            time(1) = real(t1)/count_rate
             write(6,'(1X,A,1X,F15.6)') 'OMP with element-wise mult:',real(t2)/count_rate
+            time(2) = real(t2)/count_rate
             write(6,'(1X,A,1X,F15.6)') 'Naive OMP:                 ',real(t3)/count_rate
+            time(3) = real(t3)/count_rate
 
         end subroutine tensor_dot_tests
 end module tensor_dot_tests_m
@@ -775,6 +795,26 @@ module tensor_contraction_4d2d_transpose_tests_m
         end subroutine tensor_contraction_4d2d_transpose_tests
 end module tensor_contraction_4d2d_transpose_tests_m
 
+module timemod
+    use linalg
+    implicit none
+    contains
+    subroutine print_time(time, num_items)
+        use, intrinsic :: iso_fortran_env, only: iunit=>output_unit
+        integer, intent(in) :: num_items
+        real(dp), intent(in) :: time(:,:)
+        integer :: i
+        character(255) :: fmt_str
+
+        write(fmt_str,'(A,I0,A)') '(1X,F5.0,', num_items, '(ES15.8))'
+
+        write(iunit, '(1X, A)') 'Final time listing'
+        do i = lbound(time,dim=2), ubound(time,dim=2)
+            write(iunit, trim(fmt_str)) time(:num_items+1,i)
+        end do
+
+    end subroutine print_time
+end module timemod
 
 program dgemm_test
     use, intrinsic :: iso_fortran_env, only: stdin=>input_unit, stdout=>output_unit, stderr=>error_unit
@@ -785,23 +825,38 @@ program dgemm_test
     use tensor_contraction_tests_m, only: tensor_contraction_tests
     use tensor_contraction_4d2d_tests_m, only: tensor_contraction_4d2d_tests
     use tensor_contraction_4d2d_transpose_tests_m, only: tensor_contraction_4d2d_transpose_tests
+    use timemod, only: print_time
 
     implicit none
+
+    real(dp), allocatable :: time(:,:)
+    integer :: i, j, lo, hi, step, num_steps, dim
+
 
     ! We test the performance several cases of dense tensor contractions between OpenBLAS(OMP threaded), matmul(where possible)
     ! and naive loops + OpenMP
 
-    call matmul_tests()
+    lo = 10
+    hi = 120
+    step = 10
+    num_steps = (hi-lo)/step + 1
+    j = 1
+    allocate(time(5, num_steps))
 
-    call workshare_tests()
+    do i = lo, hi, step
+        time(1, j) = i
+        !call matmul_tests(i, time(2:,j))
+        call tensor_dot_tests(i, time(2:,j))
+        j = j + 1
+    end do
 
-    call tensor_dot_tests()
+    call print_time(time, 3)
 
-    call tensor_contraction_tests()
-
-    call tensor_contraction_4d2d_tests()
-
-    call tensor_contraction_4d2d_transpose_tests()
+    !call workshare_tests()
+    !call tensor_dot_tests()
+    !call tensor_contraction_tests()
+    !call tensor_contraction_4d2d_tests()
+    !call tensor_contraction_4d2d_transpose_tests()
     
 end program dgemm_test
 
