@@ -824,6 +824,165 @@ module tensor_contraction_4d2d_transpose_tests_m
         end subroutine tensor_contraction_4d2d_transpose_tests
 end module tensor_contraction_4d2d_transpose_tests_m
 
+module order_4_2_tests_m
+    use linalg
+
+    implicit none
+
+    contains
+
+        subroutine order_4_2_dgemm(A,B,C,t,dim)
+            integer, intent(in) :: dim
+            real(dp), intent(in) :: A(:,:,:,:),B(:,:,:,:)
+            real(dp), dimension(:,:,:,:), intent(out) :: C
+            integer(kind=8), intent(out) :: t
+            integer(kind=8) :: t0, t1
+            real(dp), dimension(:,:,:,:), allocatable :: tmp1, tmp2
+
+            call system_clock(t0)
+            allocate(tmp1(dim,dim,dim,dim))
+            allocate(tmp2(dim,dim,dim,dim))
+            ! Reshape mbie -> bime
+            tmp1 = reshape(A,(/dim,dim,dim,dim/),order=(/3,1,2,4/))
+            tmp2 = reshape(B,(/dim,dim,dim,dim/),order=(/3,1,4,2/))
+            call dgemm_wrapper('N','N', dim**2, dim**2, dim**2, tmp1 ,tmp2, C)
+            deallocate(tmp2)
+            tmp1 = reshape(C,(/dim,dim,dim,dim/),order=(/1,3,2,4/))
+            C = tmp1
+            call system_clock(t1)
+
+            t = t1-t0
+
+        end subroutine order_4_2_dgemm
+
+        subroutine order_4_2_direct(A_arr,B_arr,C_arr,t,dim)
+            integer, intent(in) :: dim
+            real(dp), intent(in) :: A_arr(:,:,:,:),B_arr(:,:,:,:)
+            real(dp), dimension(:,:,:,:), intent(out) :: C_arr
+            integer(kind=8), intent(out) :: t
+            integer(kind=8) :: t0, t1
+            real(dp), dimension(:,:,:,:), allocatable :: tmp1, tmp2
+            integer :: b,j,i,e,m,a
+
+            call system_clock(t0)
+            !$omp parallel do default(none) schedule(static,50) collapse(2) shared(A_arr,B_arr,C_arr,dim)
+            do a = 1, dim
+                do i = 1, dim
+                    do j = 1, dim
+                        do b = 1, dim
+                            C_arr(b,j,i,a) = 0.0_dp
+                            do e = 1, dim
+                                do m = 1, dim
+                                    C_arr(b,j,i,a) = C_arr(b,j,i,a) + A_arr(m,b,i,e)*B_arr(j,m,a,e)
+                                end do
+                            end do
+                        end do
+                    end do
+                end do
+            end do
+            !$omp end parallel do
+
+            call system_clock(t1)
+
+            t = t1-t0
+
+        end subroutine order_4_2_direct
+
+        subroutine order_4_2_dgemm_omp_reshape(A,B,C,t,dim)
+            integer, intent(in) :: dim
+            real(dp), intent(in) :: A(:,:,:,:),B(:,:,:,:)
+            real(dp), dimension(:,:,:,:), intent(out) :: C
+            integer(kind=8), intent(out) :: t
+            integer(kind=8) :: t0, t1
+            real(dp), dimension(:,:,:,:), allocatable :: tmp1, tmp2
+            integer :: i,j,k,l
+
+            call system_clock(t0)
+            allocate(tmp1(dim,dim,dim,dim))
+            allocate(tmp2(dim,dim,dim,dim))
+            ! Reshape mbie -> bime
+
+            !$omp parallel do default(none) schedule(static,50) collapse(2) shared(A,B,tmp1,tmp2,dim)
+            do l = 1, dim
+                do k = 1, dim
+                    do j = 1, dim
+                        do i = 1, dim
+                            tmp1(j,k,i,l) = A(i,j,k,l)
+                            tmp2(j,l,i,k) = B(i,j,k,l)
+                        end do
+                    end do
+                end do
+            end do
+            !$omp end parallel do
+
+            call dgemm_wrapper('N','N', dim**2, dim**2, dim**2, tmp1 ,tmp2, C)
+            deallocate(tmp2)
+            !$omp parallel do default(none) schedule(static,50) collapse(2) shared(C,tmp1,dim)
+            do l = 1, dim
+                do k = 1, dim
+                    do j = 1, dim
+                        do i = 1, dim
+                            tmp1(i,k,j,l) = C(i,j,k,l)
+                        end do
+                    end do
+                end do
+            end do
+            !$omp end parallel do
+            C = tmp1
+            call system_clock(t1)
+
+            t = t1-t0
+
+        end subroutine order_4_2_dgemm_omp_reshape
+
+        subroutine order_4_2_tests(dim, time)
+            integer, intent(in) :: dim
+            real(dp), intent(inout) :: time(:)
+
+            integer(kind=8) :: t1, t2, t3, t4, count_rate, count_max
+            real(dp), dimension(:,:,:,:), allocatable :: A,B,C
+            real(dp) :: c1, c2, c3, c4
+
+            allocate(A(dim,dim,dim,dim), source=0.0_dp)
+            allocate(B(dim,dim,dim,dim), source=0.0_dp)
+            allocate(C(dim,dim,dim,dim), source=0.0_dp)
+            
+            call random_number(A)
+            call random_number(B)
+
+            write(6,'(1X,A,I0)') &
+            'Order(4,2) contraction, mbie,jmae->bjia, with dimension ',dim
+            call system_clock(count_rate=count_rate, count_max=count_max)
+            call order_4_2_dgemm(A,B,C,t1,dim)
+            c1 = sum(abs(C))/size(C)
+            C = 0.0_dp
+            call order_4_2_dgemm_omp_reshape(A,B,C,t2,dim)
+            c2 = sum(abs(C))/size(C)
+            C = 0.0_dp
+            call system_clock(count_rate=count_rate, count_max=count_max)
+            call order_4_2_direct(A,B,C,t3,dim)
+            c3 = sum(abs(C))/size(C)
+
+
+            if (stdev((/c1,c2,c3/)) < 1e-5) then
+                write(6,'(1X,A)') 'Test passed!'
+            else
+                write(6,'(1X,A)') 'Test failed!'
+                print*,c1,c2,c3,stdev((/c1,c2,c3/))
+            end if
+
+            write(6,'(1X,A)') 'Timings (s)'
+            write(6,'(1X,A,1X,F15.6)') 'dgemm:                     ',real(t1)/count_rate
+            time(1) = real(t1)/count_rate
+            write(6,'(1X,A,1X,F15.6)') 'dgemm with omp reshape:    ',real(t2)/count_rate
+            time(2) = real(t2)/count_rate
+            write(6,'(1X,A,1X,F15.6)') 'Direct OMP:                ',real(t3)/count_rate
+            time(3) = real(t3)/count_rate
+
+        end subroutine order_4_2_tests
+end module order_4_2_tests_m
+
+
 module timemod
     use linalg
     implicit none
@@ -854,11 +1013,12 @@ program dgemm_test
     use tensor_contraction_tests_m, only: tensor_contraction_tests
     use tensor_contraction_4d2d_tests_m, only: tensor_contraction_4d2d_tests
     use tensor_contraction_4d2d_transpose_tests_m, only: tensor_contraction_4d2d_transpose_tests
+    use order_4_2_tests_m, only: order_4_2_tests
     use timemod, only: print_time
 
     implicit none
 
-    real(dp), dimension(:,:), allocatable :: time_matmul, time_tdot, time_tcontr1, time_tcontr2, time_tcontr3
+    real(dp), dimension(:,:), allocatable :: time_matmul, time_tdot, time_tcontr1, time_tcontr2, time_tcontr3, time_order_4_2
     integer :: i, j, lo, hi, step, num_steps, dim
 
 
@@ -866,7 +1026,7 @@ program dgemm_test
     ! and naive loops + OpenMP
 
     lo = 10
-    hi = 120
+    hi = 30
     step = 10
     num_steps = (hi-lo)/step + 1
     j = 1
@@ -876,27 +1036,31 @@ program dgemm_test
     allocate(time_tcontr1(4, num_steps))
     allocate(time_tcontr2(4, num_steps))
     allocate(time_tcontr3(5, num_steps))
-
+    allocate(time_order_4_2(4, num_steps))
 
     do i = lo, hi, step
-        time_matmul(1, j) = i
-        time_tdot(1, j) = i
-        time_tcontr1(1, j) = i
-        time_tcontr2(1, j) = i
-        time_tcontr3(1, j) = i
-        call matmul_tests(i, time_matmul(2:,j))
-        call tensor_dot_tests(i, time_tdot(2:,j))
-        call tensor_contraction_tests(i, time_tcontr1(2:,j))
-        call tensor_contraction_4d2d_tests(i, time_tcontr2(2:,j))
-        call tensor_contraction_4d2d_transpose_tests(i, time_tcontr3(2:,j))
+        !time_matmul(1, j) = i
+        !time_tdot(1, j) = i
+        !time_tcontr1(1, j) = i
+        !time_tcontr2(1, j) = i
+        !time_tcontr3(1, j) = i
+        !time_order_4_2(1, j) = i
+        !call matmul_tests(i, time_matmul(2:,j))
+        !call tensor_dot_tests(i, time_tdot(2:,j))
+        !call tensor_contraction_tests(i, time_tcontr1(2:,j))
+        !call tensor_contraction_4d2d_tests(i, time_tcontr2(2:,j))
+        !call tensor_contraction_4d2d_transpose_tests(i, time_tcontr3(2:,j))
+        call order_4_2_tests(i, time_order_4_2(2:,j))
         j = j + 1
     end do
 
-    call print_time(time_matmul, 4)
-    call print_time(time_tdot, 3)
-    call print_time(time_tcontr1, 3)
-    call print_time(time_tcontr2, 3)
-    call print_time(time_tcontr3, 4)
+    !call print_time(time_matmul, 4)
+    !call print_time(time_tdot, 3)
+    !call print_time(time_tcontr1, 3)
+    !call print_time(time_tcontr2, 3)
+    !call print_time(time_tcontr3, 4)
+    call print_time(time_order_4_2, 3)
+
 
     !call workshare_tests()
     !call tensor_dot_tests()
