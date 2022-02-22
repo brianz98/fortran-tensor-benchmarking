@@ -1,0 +1,1 @@
+ifort dgemm_test.f90 -o dgemm_test -O3 -fp-model=fast -qopenmp  -L${MKLROOT}/lib/intel64 -lmkl_intel_ilp64 -lmkl_intel_thread -lmkl_core -liomp5 -lpthread -lm -ldl -i8 -I"${MKLROOT}/include" -heap-arrays

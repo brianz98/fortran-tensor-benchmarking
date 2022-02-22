@@ -1,0 +1,634 @@
+ Testing simple case of C=A*B, with outer dimensions of (10,10) and inner dimension of 10
+ Test passed!
+ Timings (s)
+ Intrinsic matmul:        0.000001
+ Workshare matmul:        0.001750
+ dgemm:                   0.000745
+ OMP:                     0.000007
+ Now test a tensor contraction: I_e^m t_mi^ea, with outer dimensions of (10,10) and inner 10
+ Test passed!
+ Timings (s)
+ Threaded ddot:                     0.000120
+ OMP with element-wise mult:        0.000035
+ Naive OMP:                         0.000029
+ Now the case of v_ei^mn t_mn^ea, with outer dimensions of (10,10) and inner 1000
+ Test passed!
+ Timings (s)
+ dgemm:                             0.000142
+ OMP with element-wise mult:        0.000331
+ Naive OMP:                         0.000260
+ Now the case of t_ij^ae I_e^b, with outer dimensions of (100,100) and inner 10
+ Test passed!
+ Timings (s)
+ dgemm:                             0.000039
+ OMP with element-wise mult:        0.000257
+ Naive OMP:                         0.000249
+ Now the case of t_im^ab I_j^m, with outer dimensions of (100,100) and inner 10
+ Test passed!
+ Timings (s)
+ dgemm:                             0.000194
+ dgemm alternative:                 0.000144
+ OMP with element-wise mult:        0.000259
+ Naive OMP:                         0.000247
+ Testing simple case of C=A*B, with outer dimensions of (20,20) and inner dimension of 20
+ Test passed!
+ Timings (s)
+ Intrinsic matmul:        0.000015
+ Workshare matmul:        0.000031
+ dgemm:                   0.000005
+ OMP:                     0.000013
+ Now test a tensor contraction: I_e^m t_mi^ea, with outer dimensions of (20,20) and inner 20
+ Test passed!
+ Timings (s)
+ Threaded ddot:                     0.001526
+ OMP with element-wise mult:        0.000262
+ Naive OMP:                         0.000233
+ Now the case of v_ei^mn t_mn^ea, with outer dimensions of (20,20) and inner 8000
+ Test passed!
+ Timings (s)
+ dgemm:                             0.001501
+ OMP with element-wise mult:        0.006924
+ Naive OMP:                         0.003062
+ Now the case of t_ij^ae I_e^b, with outer dimensions of (400,400) and inner 20
+ Test passed!
+ Timings (s)
+ dgemm:                             0.000476
+ OMP with element-wise mult:        0.001772
+ Naive OMP:                         0.001745
+ Now the case of t_im^ab I_j^m, with outer dimensions of (400,400) and inner 20
+ Test passed!
+ Timings (s)
+ dgemm:                             0.002465
+ dgemm alternative:                 0.002261
+ OMP with element-wise mult:        0.001484
+ Naive OMP:                         0.001621
+ Testing simple case of C=A*B, with outer dimensions of (30,30) and inner dimension of 30
+ Test passed!
+ Timings (s)
+ Intrinsic matmul:        0.000045
+ Workshare matmul:        0.000038
+ dgemm:                   0.000010
+ OMP:                     0.000016
+ Now test a tensor contraction: I_e^m t_mi^ea, with outer dimensions of (30,30) and inner 30
+ Test passed!
+ Timings (s)
+ Threaded ddot:                     0.007238
+ OMP with element-wise mult:        0.000505
+ Naive OMP:                         0.000412
+ Now the case of v_ei^mn t_mn^ea, with outer dimensions of (30,30) and inner 27000
+ Test passed!
+ Timings (s)
+ dgemm:                             0.007520
+ OMP with element-wise mult:        0.029466
+ Naive OMP:                         0.013643
+ Now the case of t_ij^ae I_e^b, with outer dimensions of (900,900) and inner 30
+ Test passed!
+ Timings (s)
+ dgemm:                             0.001140
+ OMP with element-wise mult:        0.007202
+ Naive OMP:                         0.007065
+ Now the case of t_im^ab I_j^m, with outer dimensions of (900,900) and inner 30
+ Test passed!
+ Timings (s)
+ dgemm:                             0.008102
+ dgemm alternative:                 0.010425
+ OMP with element-wise mult:        0.006764
+ Naive OMP:                         0.006506
+ Testing simple case of C=A*B, with outer dimensions of (40,40) and inner dimension of 40
+ Test passed!
+ Timings (s)
+ Intrinsic matmul:        0.000041
+ Workshare matmul:        0.000078
+ dgemm:                   0.000019
+ OMP:                     0.000024
+ Now test a tensor contraction: I_e^m t_mi^ea, with outer dimensions of (40,40) and inner 40
+ Test passed!
+ Timings (s)
+ Threaded ddot:                     0.022162
+ OMP with element-wise mult:        0.002054
+ Naive OMP:                         0.002145
+ Now the case of v_ei^mn t_mn^ea, with outer dimensions of (40,40) and inner 64000
+ Test passed!
+ Timings (s)
+ dgemm:                             0.034559
+ OMP with element-wise mult:        0.203176
+ Naive OMP:                         0.042437
+ Now the case of t_ij^ae I_e^b, with outer dimensions of (1600,1600) and inner 40
+ Test passed!
+ Timings (s)
+ dgemm:                             0.005427
+ OMP with element-wise mult:        0.062774
+ Naive OMP:                         0.030361
+ Now the case of t_im^ab I_j^m, with outer dimensions of (1600,1600) and inner 40
+ Test passed!
+ Timings (s)
+ dgemm:                             0.026962
+ dgemm alternative:                 0.036408
+ OMP with element-wise mult:        0.035923
+ Naive OMP:                         0.025342
+ Testing simple case of C=A*B, with outer dimensions of (50,50) and inner dimension of 50
+ Test passed!
+ Timings (s)
+ Intrinsic matmul:        0.000046
+ Workshare matmul:        0.000057
+ dgemm:                   0.000022
+ OMP:                     0.000037
+ Now test a tensor contraction: I_e^m t_mi^ea, with outer dimensions of (50,50) and inner 50
+ Test passed!
+ Timings (s)
+ Threaded ddot:                     0.050808
+ OMP with element-wise mult:        0.003713
+ Naive OMP:                         0.004223
+ Now the case of v_ei^mn t_mn^ea, with outer dimensions of (50,50) and inner 125000
+ Test passed!
+ Timings (s)
+ dgemm:                             0.052473
+ OMP with element-wise mult:        0.402130
+ Naive OMP:                         0.149474
+ Now the case of t_ij^ae I_e^b, with outer dimensions of (2500,2500) and inner 50
+ Test passed!
+ Timings (s)
+ dgemm:                             0.014623
+ OMP with element-wise mult:        0.125909
+ Naive OMP:                         0.106519
+ Now the case of t_im^ab I_j^m, with outer dimensions of (2500,2500) and inner 50
+ Test passed!
+ Timings (s)
+ dgemm:                             0.067336
+ dgemm alternative:                 0.086130
+ OMP with element-wise mult:        0.060826
+ Naive OMP:                         0.048246
+ Testing simple case of C=A*B, with outer dimensions of (60,60) and inner dimension of 60
+ Test passed!
+ Timings (s)
+ Intrinsic matmul:        0.000057
+ Workshare matmul:        0.000063
+ dgemm:                   0.000027
+ OMP:                     0.000035
+ Now test a tensor contraction: I_e^m t_mi^ea, with outer dimensions of (60,60) and inner 60
+ Test passed!
+ Timings (s)
+ Threaded ddot:                     0.102818
+ OMP with element-wise mult:        0.008217
+ Naive OMP:                         0.008976
+ Now the case of v_ei^mn t_mn^ea, with outer dimensions of (60,60) and inner 216000
+ Test passed!
+ Timings (s)
+ dgemm:                             0.120878
+ OMP with element-wise mult:        1.523911
+ Naive OMP:                         0.610828
+ Now the case of t_ij^ae I_e^b, with outer dimensions of (3600,3600) and inner 60
+ Test passed!
+ Timings (s)
+ dgemm:                             0.029799
+ OMP with element-wise mult:        0.279082
+ Naive OMP:                         0.259949
+ Now the case of t_im^ab I_j^m, with outer dimensions of (3600,3600) and inner 60
+ Test passed!
+ Timings (s)
+ dgemm:                             0.149522
+ dgemm alternative:                 0.182547
+ OMP with element-wise mult:        0.108938
+ Naive OMP:                         0.106474
+ Testing simple case of C=A*B, with outer dimensions of (70,70) and inner dimension of 70
+ Test passed!
+ Timings (s)
+ Intrinsic matmul:        0.000076
+ Workshare matmul:        0.000082
+ dgemm:                   0.000073
+ OMP:                     0.000106
+ Now test a tensor contraction: I_e^m t_mi^ea, with outer dimensions of (70,70) and inner 70
+ Test passed!
+ Timings (s)
+ Threaded ddot:                     0.195918
+ OMP with element-wise mult:        0.015256
+ Naive OMP:                         0.015418
+ Now the case of v_ei^mn t_mn^ea, with outer dimensions of (70,70) and inner 343000
+ Test passed!
+ Timings (s)
+ dgemm:                             0.229488
+ OMP with element-wise mult:        3.393113
+ Naive OMP:                         1.444129
+ Now the case of t_ij^ae I_e^b, with outer dimensions of (4900,4900) and inner 70
+ Test passed!
+ Timings (s)
+ dgemm:                             0.057203
+ OMP with element-wise mult:        0.606116
+ Naive OMP:                         0.601443
+ Now the case of t_im^ab I_j^m, with outer dimensions of (4900,4900) and inner 70
+ Test passed!
+ Timings (s)
+ dgemm:                             0.273893
+ dgemm alternative:                 0.320798
+ OMP with element-wise mult:        0.240761
+ Naive OMP:                         0.237164
+ Testing simple case of C=A*B, with outer dimensions of (80,80) and inner dimension of 80
+ Test passed!
+ Timings (s)
+ Intrinsic matmul:        0.000098
+ Workshare matmul:        0.000104
+ dgemm:                   0.000080
+ OMP:                     0.000185
+ Now test a tensor contraction: I_e^m t_mi^ea, with outer dimensions of (80,80) and inner 80
+ Test passed!
+ Timings (s)
+ Threaded ddot:                     0.335059
+ OMP with element-wise mult:        0.021187
+ Naive OMP:                         0.022951
+ Now the case of v_ei^mn t_mn^ea, with outer dimensions of (80,80) and inner 512000
+ Test passed!
+ Timings (s)
+ dgemm:                             0.858752
+ OMP with element-wise mult:        6.890901
+ Naive OMP:                         2.943896
+ Now the case of t_ij^ae I_e^b, with outer dimensions of (6400,6400) and inner 80
+ Test passed!
+ Timings (s)
+ dgemm:                             0.102719
+ OMP with element-wise mult:        1.664108
+ Naive OMP:                         1.665331
+ Now the case of t_im^ab I_j^m, with outer dimensions of (6400,6400) and inner 80
+ Test passed!
+ Timings (s)
+ dgemm:                             0.424226
+ dgemm alternative:                 0.561828
+ OMP with element-wise mult:        0.458459
+ Naive OMP:                         0.458123
+ Testing simple case of C=A*B, with outer dimensions of (90,90) and inner dimension of 90
+ Test passed!
+ Timings (s)
+ Intrinsic matmul:        0.000132
+ Workshare matmul:        0.000143
+ dgemm:                   0.000087
+ OMP:                     0.000311
+ Now test a tensor contraction: I_e^m t_mi^ea, with outer dimensions of (90,90) and inner 90
+ Test passed!
+ Timings (s)
+ Threaded ddot:                     0.511385
+ OMP with element-wise mult:        0.033136
+ Naive OMP:                         0.042597
+ Now the case of v_ei^mn t_mn^ea, with outer dimensions of (90,90) and inner 729000
+ Test passed!
+ Timings (s)
+ dgemm:                             0.573238
+ OMP with element-wise mult:       11.314176
+ Naive OMP:                         4.972451
+ Now the case of t_ij^ae I_e^b, with outer dimensions of (8100,8100) and inner 90
+ Test passed!
+ Timings (s)
+ dgemm:                             0.142337
+ OMP with element-wise mult:        2.007304
+ Naive OMP:                         2.007690
+ Now the case of t_im^ab I_j^m, with outer dimensions of (8100,8100) and inner 90
+ Test passed!
+ Timings (s)
+ dgemm:                             0.673378
+ dgemm alternative:                 0.877296
+ OMP with element-wise mult:        0.812016
+ Naive OMP:                         0.809243
+ Testing simple case of C=A*B, with outer dimensions of (100,100) and inner dimension of 100
+ Test passed!
+ Timings (s)
+ Intrinsic matmul:        0.000163
+ Workshare matmul:        0.000153
+ dgemm:                   0.000092
+ OMP:                     0.000493
+ Now test a tensor contraction: I_e^m t_mi^ea, with outer dimensions of (100,100) and inner 100
+ Test passed!
+ Timings (s)
+ Threaded ddot:                     0.799322
+ OMP with element-wise mult:        0.047201
+ Naive OMP:                         0.061563
+ Now the case of v_ei^mn t_mn^ea, with outer dimensions of (100,100) and inner 1000000
+ Test passed!
+ Timings (s)
+ dgemm:                             0.990474
+ OMP with element-wise mult:       16.477110
+ Naive OMP:                         8.171070
+ Now the case of t_ij^ae I_e^b, with outer dimensions of (10000,10000) and inner 100
+ Test passed!
+ Timings (s)
+ dgemm:                             0.177642
+ OMP with element-wise mult:        3.209456
+ Naive OMP:                         3.225388
+ Now the case of t_im^ab I_j^m, with outer dimensions of (10000,10000) and inner 100
+ Test passed!
+ Timings (s)
+ dgemm:                             1.002607
+ dgemm alternative:                 1.382926
+ OMP with element-wise mult:        1.396569
+ Naive OMP:                         1.397109
+ Testing simple case of C=A*B, with outer dimensions of (110,110) and inner dimension of 110
+ Test passed!
+ Timings (s)
+ Intrinsic matmul:        0.000207
+ Workshare matmul:        0.000209
+ dgemm:                   0.000135
+ OMP:                     0.000674
+ Now test a tensor contraction: I_e^m t_mi^ea, with outer dimensions of (110,110) and inner 110
+ Test passed!
+ Timings (s)
+ Threaded ddot:                     1.139029
+ OMP with element-wise mult:        0.065957
+ Naive OMP:                         0.096765
+ Now the case of v_ei^mn t_mn^ea, with outer dimensions of (110,110) and inner 1331000
+ Test passed!
+ Timings (s)
+ dgemm:                             1.235426
+ OMP with element-wise mult:       32.238251
+ Naive OMP:                        13.709481
+ Now the case of t_ij^ae I_e^b, with outer dimensions of (12100,12100) and inner 110
+ Test passed!
+ Timings (s)
+ dgemm:                             0.310987
+ OMP with element-wise mult:        5.478547
+ Naive OMP:                         5.560509
+ Now the case of t_im^ab I_j^m, with outer dimensions of (12100,12100) and inner 110
+ Test passed!
+ Timings (s)
+ dgemm:                             1.501226
+ dgemm alternative:                 1.977276
+ OMP with element-wise mult:        2.266661
+ Naive OMP:                         2.263540
+ Testing simple case of C=A*B, with outer dimensions of (120,120) and inner dimension of 120
+ Test passed!
+ Timings (s)
+ Intrinsic matmul:        0.000247
+ Workshare matmul:        0.000256
+ dgemm:                   0.000128
+ OMP:                     0.000722
+ Now test a tensor contraction: I_e^m t_mi^ea, with outer dimensions of (120,120) and inner 120
+ Test passed!
+ Timings (s)
+ Threaded ddot:                     1.716249
+ OMP with element-wise mult:        0.087173
+ Naive OMP:                         0.134322
+ Now the case of v_ei^mn t_mn^ea, with outer dimensions of (120,120) and inner 1728000
+ Test passed!
+ Timings (s)
+ dgemm:                             4.240153
+ OMP with element-wise mult:       50.387241
+ Naive OMP:                        21.577055
+ Now the case of t_ij^ae I_e^b, with outer dimensions of (14400,14400) and inner 120
+ Test passed!
+ Timings (s)
+ dgemm:                             0.497062
+ OMP with element-wise mult:       12.412837
+ Naive OMP:                        12.686384
+ Now the case of t_im^ab I_j^m, with outer dimensions of (14400,14400) and inner 120
+ Test passed!
+ Timings (s)
+ dgemm:                             2.107321
+ dgemm alternative:                 2.910281
+ OMP with element-wise mult:        3.452193
+ Naive OMP:                         3.446902
+ Testing simple case of C=A*B, with outer dimensions of (130,130) and inner dimension of 130
+ Test passed!
+ Timings (s)
+ Intrinsic matmul:        0.000335
+ Workshare matmul:        0.000300
+ dgemm:                   0.000113
+ OMP:                     0.000651
+ Now test a tensor contraction: I_e^m t_mi^ea, with outer dimensions of (130,130) and inner 130
+ Test passed!
+ Timings (s)
+ Threaded ddot:                     2.354496
+ OMP with element-wise mult:        0.116555
+ Naive OMP:                         0.179928
+ Now the case of v_ei^mn t_mn^ea, with outer dimensions of (130,130) and inner 2197000
+ Test passed!
+ Timings (s)
+ dgemm:                             2.528573
+ OMP with element-wise mult:       71.670319
+ Naive OMP:                        35.530914
+ Now the case of t_ij^ae I_e^b, with outer dimensions of (16900,16900) and inner 130
+ Test passed!
+ Timings (s)
+ dgemm:                             0.768498
+ OMP with element-wise mult:       14.642661
+ Naive OMP:                        12.422500
+ Now the case of t_im^ab I_j^m, with outer dimensions of (16900,16900) and inner 130
+ Test passed!
+ Timings (s)
+ dgemm:                             3.021947
+ dgemm alternative:                 4.285477
+ OMP with element-wise mult:        5.461599
+ Naive OMP:                         5.439521
+ Testing simple case of C=A*B, with outer dimensions of (140,140) and inner dimension of 140
+ Test passed!
+ Timings (s)
+ Intrinsic matmul:        0.000355
+ Workshare matmul:        0.000361
+ dgemm:                   0.000186
+ OMP:                     0.001683
+ Now test a tensor contraction: I_e^m t_mi^ea, with outer dimensions of (140,140) and inner 140
+ Test passed!
+ Timings (s)
+ Threaded ddot:                     3.494029
+ OMP with element-wise mult:        0.164829
+ Naive OMP:                         0.213281
+ Now the case of v_ei^mn t_mn^ea, with outer dimensions of (140,140) and inner 2744000
+ Test passed!
+ Timings (s)
+ dgemm:                             4.127450
+ OMP with element-wise mult:      108.778496
+ Naive OMP:                        47.129505
+ Now the case of t_ij^ae I_e^b, with outer dimensions of (19600,19600) and inner 140
+ Test passed!
+ Timings (s)
+ dgemm:                             0.981343
+ OMP with element-wise mult:       19.092173
+ Naive OMP:                        18.937401
+ Now the case of t_im^ab I_j^m, with outer dimensions of (19600,19600) and inner 140
+ Test passed!
+ Timings (s)
+ dgemm:                             3.873458
+ dgemm alternative:                 6.118572
+ OMP with element-wise mult:        8.072273
+ Naive OMP:                         7.875525
+ Testing simple case of C=A*B, with outer dimensions of (150,150) and inner dimension of 150
+ Test passed!
+ Timings (s)
+ Intrinsic matmul:        0.000450
+ Workshare matmul:        0.000451
+ dgemm:                   0.000176
+ OMP:                     0.001430
+ Now test a tensor contraction: I_e^m t_mi^ea, with outer dimensions of (150,150) and inner 150
+ Test passed!
+ Timings (s)
+ Threaded ddot:                     4.544734
+ OMP with element-wise mult:        0.208698
+ Naive OMP:                         0.252542
+ Now the case of v_ei^mn t_mn^ea, with outer dimensions of (150,150) and inner 3375000
+ Test passed!
+ Timings (s)
+ dgemm:                             4.407933
+ OMP with element-wise mult:      127.947556
+ Naive OMP:                        65.631065
+ Now the case of t_ij^ae I_e^b, with outer dimensions of (22500,22500) and inner 150
+ Test passed!
+ Timings (s)
+ dgemm:                             1.393171
+ OMP with element-wise mult:       23.611876
+ Naive OMP:                        23.494959
+ Now the case of t_im^ab I_j^m, with outer dimensions of (22500,22500) and inner 150
+ Test passed!
+ Timings (s)
+ dgemm:                             5.111291
+ dgemm alternative:                 7.815851
+ OMP with element-wise mult:       14.232308
+ Naive OMP:                        11.653217
+ Testing simple case of C=A*B, with outer dimensions of (160,160) and inner dimension of 160
+ Test passed!
+ Timings (s)
+ Intrinsic matmul:        0.000536
+ Workshare matmul:        0.000503
+ dgemm:                   0.000227
+ OMP:                     0.002622
+ Now test a tensor contraction: I_e^m t_mi^ea, with outer dimensions of (160,160) and inner 160
+ Test passed!
+ Timings (s)
+ Threaded ddot:                     6.878428
+ OMP with element-wise mult:        0.249858
+ Naive OMP:                         0.303845
+ Now the case of v_ei^mn t_mn^ea, with outer dimensions of (160,160) and inner 4096000
+ Test passed!
+ Timings (s)
+ dgemm:                            14.110112
+ OMP with element-wise mult:      221.991287
+ Naive OMP:                       159.183289
+ Now the case of t_ij^ae I_e^b, with outer dimensions of (25600,25600) and inner 160
+ Test passed!
+ Timings (s)
+ dgemm:                             2.840163
+ OMP with element-wise mult:      258.244385
+ Naive OMP:                       257.238953
+ Now the case of t_im^ab I_j^m, with outer dimensions of (25600,25600) and inner 160
+ Test passed!
+ Timings (s)
+ dgemm:                             7.970015
+ dgemm alternative:                13.425586
+ OMP with element-wise mult:       36.073662
+ Naive OMP:                        34.339550
+ Testing simple case of C=A*B, with outer dimensions of (170,170) and inner dimension of 170
+ Test passed!
+ Timings (s)
+ Intrinsic matmul:        0.000606
+ Workshare matmul:        0.000612
+ dgemm:                   0.000323
+ OMP:                     0.003831
+ Now test a tensor contraction: I_e^m t_mi^ea, with outer dimensions of (170,170) and inner 170
+ Test passed!
+ Timings (s)
+ Threaded ddot:                     7.590168
+ OMP with element-wise mult:        0.420671
+ Naive OMP:                         0.523843
+ Now the case of v_ei^mn t_mn^ea, with outer dimensions of (170,170) and inner 4913000
+ Test passed!
+ Timings (s)
+ dgemm:                             8.539058
+ OMP with element-wise mult:      336.970184
+ Naive OMP:                       205.959137
+ Now the case of t_ij^ae I_e^b, with outer dimensions of (28900,28900) and inner 170
+ Test passed!
+ Timings (s)
+ dgemm:                             3.985569
+ OMP with element-wise mult:       55.398041
+ Naive OMP:                        54.523636
+ Now the case of t_im^ab I_j^m, with outer dimensions of (28900,28900) and inner 170
+ Test passed!
+ Timings (s)
+ dgemm:                            10.132063
+ dgemm alternative:                14.966228
+ OMP with element-wise mult:       31.551859
+ Naive OMP:                        34.970634
+ Final time listing
+   10. 1.28800002E-06 1.75008399E-03 7.45364989E-04 6.76599984E-06
+   20. 1.54009995E-05 3.05909998E-05 5.31300020E-06 1.34989996E-05
+   30. 4.46509985E-05 3.79740013E-05 1.01550004E-05 1.59859992E-05
+   40. 4.14739989E-05 7.84509975E-05 1.93680007E-05 2.44740004E-05
+   50. 4.60699994E-05 5.69100011E-05 2.15590007E-05 3.71169990E-05
+   60. 5.66150011E-05 6.30139984E-05 2.69180000E-05 3.51669987E-05
+   70. 7.63709977E-05 8.18589979E-05 7.34909991E-05 1.06058003E-04
+   80. 9.79000033E-05 1.03933999E-04 7.97239991E-05 1.85147001E-04
+   90. 1.32403002E-04 1.42600999E-04 8.68190036E-05 3.10954987E-04
+  100. 1.63093995E-04 1.53308996E-04 9.23469997E-05 4.93434025E-04
+  110. 2.06972996E-04 2.08579004E-04 1.34625996E-04 6.74045004E-04
+  120. 2.46773008E-04 2.56077008E-04 1.28425003E-04 7.22303987E-04
+  130. 3.35490011E-04 2.99796986E-04 1.12538000E-04 6.50913978E-04
+  140. 3.54566000E-04 3.60831997E-04 1.85764002E-04 1.68344297E-03
+  150. 4.50485008E-04 4.51380009E-04 1.76264002E-04 1.43049902E-03
+  160. 5.36034000E-04 5.02964016E-04 2.26613003E-04 2.62240903E-03
+  170. 6.06416026E-04 6.11650001E-04 3.23037006E-04 3.83054512E-03
+ Final time listing
+   10. 1.19691998E-04 3.47700006E-05 2.85330007E-05
+   20. 1.52619497E-03 2.62079993E-04 2.33270999E-04
+   30. 7.23814312E-03 5.05254022E-04 4.12116991E-04
+   40. 2.21615527E-02 2.05358909E-03 2.14489992E-03
+   50. 5.08077480E-02 3.71278706E-03 4.22325777E-03
+   60. 1.02818094E-01 8.21726583E-03 8.97614937E-03
+   70. 1.95917547E-01 1.52556160E-02 1.54183060E-02
+   80. 3.35059196E-01 2.11869087E-02 2.29514726E-02
+   90. 5.11385202E-01 3.31359990E-02 4.25968803E-02
+  100. 7.99321592E-01 4.72010896E-02 6.15633205E-02
+  110. 1.13902938E+00 6.59571812E-02 9.67648923E-02
+  120. 1.71624923E+00 8.71731341E-02 1.34322345E-01
+  130. 2.35449600E+00 1.16554730E-01 1.79927662E-01
+  140. 3.49402905E+00 1.64829001E-01 2.13281184E-01
+  150. 4.54473352E+00 2.08697632E-01 2.52542406E-01
+  160. 6.87842846E+00 2.49858409E-01 3.03844690E-01
+  170. 7.59016848E+00 4.20670927E-01 5.23842514E-01
+ Final time listing
+   10. 1.41804994E-04 3.30590992E-04 2.60055996E-04
+   20. 1.50129595E-03 6.92404713E-03 3.06151505E-03
+   30. 7.51974480E-03 2.94658840E-02 1.36426054E-02
+   40. 3.45589742E-02 2.03175530E-01 4.24373783E-02
+   50. 5.24726212E-02 4.02129710E-01 1.49473920E-01
+   60. 1.20878443E-01 1.52391064E+00 6.10827923E-01
+   70. 2.29488149E-01 3.39311314E+00 1.44412947E+00
+   80. 8.58751714E-01 6.89090109E+00 2.94389629E+00
+   90. 5.73238492E-01 1.13141756E+01 4.97245073E+00
+  100. 9.90473688E-01 1.64771099E+01 8.17107010E+00
+  110. 1.23542607E+00 3.22382507E+01 1.37094812E+01
+  120. 4.24015331E+00 5.03872414E+01 2.15770550E+01
+  130. 2.52857256E+00 7.16703186E+01 3.55309143E+01
+  140. 4.12744999E+00 1.08778496E+02 4.71295052E+01
+  150. 4.40793276E+00 1.27947556E+02 6.56310654E+01
+  160. 1.41101122E+01 2.21991287E+02 1.59183289E+02
+  170. 8.53905773E+00 3.36970184E+02 2.05959137E+02
+ Final time listing
+   10. 3.90509995E-05 2.56987987E-04 2.48986995E-04
+   20. 4.76482004E-04 1.77249301E-03 1.74466299E-03
+   30. 1.13996700E-03 7.20151886E-03 7.06493901E-03
+   40. 5.42694796E-03 6.27738535E-02 3.03612519E-02
+   50. 1.46229398E-02 1.25908643E-01 1.06518544E-01
+   60. 2.97993124E-02 2.79082268E-01 2.59949267E-01
+   70. 5.72025217E-02 6.06116414E-01 6.01442814E-01
+   80. 1.02719232E-01 1.66410840E+00 1.66533065E+00
+   90. 1.42336786E-01 2.00730395E+00 2.00769019E+00
+  100. 1.77642241E-01 3.20945644E+00 3.22538757E+00
+  110. 3.10986817E-01 5.47854710E+00 5.56050873E+00
+  120. 4.97061998E-01 1.24128370E+01 1.26863842E+01
+  130. 7.68498182E-01 1.46426611E+01 1.24224997E+01
+  140. 9.81343269E-01 1.90921726E+01 1.89374008E+01
+  150. 1.39317131E+00 2.36118755E+01 2.34949589E+01
+  160. 2.84016323E+00 2.58244385E+02 2.57238953E+02
+  170. 3.98556900E+00 5.53980408E+01 5.45236359E+01
+ Final time listing
+   10. 1.93696993E-04 1.44378006E-04 2.58902990E-04 2.46582989E-04
+   20. 2.46536103E-03 2.26138090E-03 1.48381200E-03 1.62104401E-03
+   30. 8.10220279E-03 1.04249325E-02 6.76388387E-03 6.50614221E-03
+   40. 2.69616134E-02 3.64081748E-02 3.59228887E-02 2.53416747E-02
+   50. 6.73364624E-02 8.61302465E-02 6.08261600E-02 4.82464731E-02
+   60. 1.49522498E-01 1.82547376E-01 1.08938001E-01 1.06473975E-01
+   70. 2.73892909E-01 3.20797533E-01 2.40761340E-01 2.37163767E-01
+   80. 4.24226433E-01 5.61827898E-01 4.58458632E-01 4.58123177E-01
+   90. 6.73378348E-01 8.77295792E-01 8.12015772E-01 8.09242725E-01
+  100. 1.00260711E+00 1.38292587E+00 1.39656937E+00 1.39710927E+00
+  110. 1.50122583E+00 1.97727633E+00 2.26666117E+00 2.26353979E+00
+  120. 2.10732079E+00 2.91028118E+00 3.45219278E+00 3.44690180E+00
+  130. 3.02194715E+00 4.28547668E+00 5.46159887E+00 5.43952084E+00
+  140. 3.87345839E+00 6.11857224E+00 8.07227325E+00 7.87552547E+00
+  150. 5.11129141E+00 7.81585121E+00 1.42323084E+01 1.16532173E+01
+  160. 7.97001505E+00 1.34255857E+01 3.60736618E+01 3.43395500E+01
+  170. 1.01320629E+01 1.49662275E+01 3.15518589E+01 3.49706345E+01
